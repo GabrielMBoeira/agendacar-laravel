@@ -12,6 +12,7 @@ class SocialiteController extends Controller
 
     public function handleProviderCallback() {
         $user = Socialite::driver('facebook')->user();
+        dd($user);
     }
 
     public function redirectToProviderGoogle() {
@@ -20,5 +21,6 @@ class SocialiteController extends Controller
 
     public function handleProviderCallbackGoogle() {
         $user = Socialite::driver('google')->user();
+        dd($user);
     }
 }
