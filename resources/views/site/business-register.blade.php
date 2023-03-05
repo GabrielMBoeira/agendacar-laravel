@@ -12,7 +12,9 @@
 
             <div class="row gy-5">
                 <div class="col-lg-12">
-                    <form action="forms/contact.php" method="post" class="php-email-form">
+                    <form action="{{ route('business.store') }}" method="post" class="php-email-form">
+                        @csrf
+                        @method('POST')
                         <div class="row gy-4">
 
                             <div class="col-md-4">
@@ -32,16 +34,16 @@
                             </div>
 
                             <div class="col-md-6 ">
-                                <input type="email" class="form-control" name="password" placeholder="Senha" required>
+                                <input type="password" class="form-control" name="password" placeholder="Senha" required>
                             </div>
 
                             <div class="col-md-6 ">
-                                <input type="email" class="form-control" name="confimr-password" placeholder="Confirme sua senha" required>
+                                <input type="password" class="form-control" name="confimr-password" placeholder="Confirme sua senha" required>
                             </div>
 
                             <div class="col-md-12 text-center">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
+                                {{-- <div class="loading">Loading</div>
+                                <div class="error-message"></div> --}}
                                 <div class="sent-message">Sua mensagem foi enviada. Obrigado!</div>
 
                                 <button type="submit">Cadastrar</button>

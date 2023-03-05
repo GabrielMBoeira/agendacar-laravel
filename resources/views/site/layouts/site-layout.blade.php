@@ -48,7 +48,7 @@
           <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
           <li><a class="nav-link scrollto" href="#team">Equipe</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contato</a></li>
-          <li><a class="getstarted scrollto" href=" {{ url('business-register') }} ">Cadastre-se</a></li>
+          <li><a class="getstarted scrollto" href=" {{ route('business.create') }} ">Cadastre-se</a></li>
           <li><a class="getstarted scrollto" href="#about">Login</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
