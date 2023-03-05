@@ -4,7 +4,11 @@ use App\Http\Controllers\SocialiteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('site');
+    return view('site.site');
+});
+
+Route::get('/business-register', function () {
+    return view('site.business-register');
 });
 
 Route::get('/dashboard', function () {

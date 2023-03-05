@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="utf-8">
@@ -28,17 +28,10 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Agendacar - v1.12.0
-  * Template URL: https://bootstrapmade.com/Agendacar-bootstrap-startup-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
 
-  <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
@@ -55,42 +48,21 @@
           <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
           <li><a class="nav-link scrollto" href="#team">Equipe</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contato</a></li>
-          <li><a class="getstarted scrollto" href="#about">Cadastre-se</a></li>
+          <li><a class="getstarted scrollto" href=" {{ url('business-register') }} ">Cadastre-se</a></li>
+          <li><a class="getstarted scrollto" href="#about">Login</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+      </nav>
 
     </div>
-  </header><!-- End Header -->
-
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="hero d-flex align-items-center">
-
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 d-flex flex-column justify-content-center">
-          <h1 data-aos="fade-up site-msg">Nós somos a solução para seus agendamentos... <br> faça um teste!</h1>
-          <h2 data-aos="fade-up" data-aos-delay="400">Obtemos a melhor metodologia de agendamento para lavação de carros...</h2>
-          <div data-aos="fade-up" data-aos-delay="600">
-            <div class="text-center text-lg-start">
-              <a href="#about" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
-                <span>Cadastre sua lavação</span>
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-          <img src="assets/img/carroSite.jpg" class="img-fluid" style="border-radius: 300px" alt="">
-        </div>
-      </div>
-    </div>
-
-  </section><!-- End Hero -->
+  </header>
 
   <main id="main">
-    {{-- <!-- ======= About Section ======= -->
-    <section id="about" class="about">
+
+        @yield('main')
+
+      {{-- <!-- ======= About Section ======= -->
+        <section id="about" class="about">
 
       <div class="container" data-aos="fade-up">
         <div class="row gx-0">
@@ -1196,7 +1168,7 @@
 
     </section><!-- End Contact Section --> --}}
 
-  </main><!-- End #main -->
+  </main>
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
@@ -1278,14 +1250,11 @@
         &copy; Copyright <strong><span>Agendacar</span></strong>. Todos direitos reservados
       </div>
       <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/Agendacar-bootstrap-startup-template/ -->
+
         Desenvolvido por <a href="#">BKM Technology</a>
       </div>
     </div>
-  </footer><!-- End Footer -->
+  </footer>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
