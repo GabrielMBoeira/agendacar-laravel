@@ -1,7 +1,8 @@
 <x-guest-layout>
     <x-auth-card>
-        <!-- Validation Errors -->
-        {{-- <x-auth-validation-errors class="mb-4" :errors="$errors" /> --}}
+
+        @section('title', 'Cadastro')
+        @section('sub-title', 'Cadastre seu estabelecimento')
 
         <form method="POST" action="{{ route('register') }}" style="width: 800px">
             @csrf
@@ -46,7 +47,7 @@
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 mx-4" href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
-                <x-button class="ml-4" style="background-color: #4154f1; border-radius: 5px; ">
+                <x-button class="ml-4" style="background-color: #4154f1; border-radius: 5px;">
                     {{ __('Register') }}
                 </x-button>
             </div>
