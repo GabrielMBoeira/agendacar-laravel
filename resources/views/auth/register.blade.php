@@ -1,56 +1,47 @@
 <x-guest-layout>
     <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
-
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" style="width: 800px">
             @csrf
 
-            <!-- Name -->
-            <div>
-                <x-label for="name" :value="__('Name')" />
+            <div class="row">
+                <div class="col-md-6">
+                    <x-label for="name" :value="__('Name')" />
+                    <x-input id="name" class="form-control" type="text" name="name" :value="old('name')" required autofocus />
+                </div>
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                <div class="col-md-6">
+                    <x-label for="email" :value="__('Email')" />
+                    <x-input id="email" class="form-control" type="email" name="email" :value="old('email')" required />
+                </div>
             </div>
 
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <x-label for="business" :value="__('Nome do estabelecimento')" />
+                    <x-input id="business" class="form-control" type="business" name="business" :value="old('business')" required />
+                </div>
             </div>
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+            <div class="row mt-4">
+                <div class="col-md 6">
+                    <x-label for="password" :value="__('Password')" />
+                    <x-input id="password" class="form-control" type="password" name="password" required autocomplete="new-password" />
+                </div>
 
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="new-password" />
+                <div class="col-md-6">
+                    <x-label for="password_confirmation" :value="__('Confirm Password')" />
+                    <x-input id="password_confirmation" class="form-control" type="password" name="password_confirmation" required />
+                </div>
             </div>
 
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+            <div style="display: flex; align-items: center; justify-content: center; margin-top: 20px">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 mx-4" href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
-
-                <x-button class="ml-4">
+                <x-button class="ml-4" style="background-color: #4154f1; border-radius: 5px; ">
                     {{ __('Register') }}
                 </x-button>
             </div>

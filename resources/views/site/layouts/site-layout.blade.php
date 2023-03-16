@@ -35,21 +35,21 @@
   <header id="header" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="#" class="logo d-flex align-items-center">
+      <a href="{{ url('/') }}" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
         <span>Agendacar</span>
       </a>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto active" href="{{ url('/') }}">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">Sobre</a></li>
           <li><a class="nav-link scrollto" href="#services">Serviços</a></li>
           <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
           <li><a class="nav-link scrollto" href="#team">Equipe</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contato</a></li>
-          <li><a class="getstarted scrollto" href=" {{ route('business.create') }} ">Cadastre-se</a></li>
-          <li><a class="getstarted scrollto" href="#about">Login</a></li>
+          <li><a class="getstarted scrollto" href=" {{ route('register') }} ">Cadastre-se</a></li>
+          <li><a class="getstarted scrollto" href="{{ url('/login') }}">Login</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
