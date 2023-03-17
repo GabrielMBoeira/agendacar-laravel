@@ -12,6 +12,9 @@
 
             <div class="row gy-5">
                 <div class="col-lg-12">
+
+                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
                     {{ $slot }}
                 </div>
             </div>

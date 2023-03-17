@@ -14,10 +14,7 @@
 
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')" />
-                <x-input id="password" class="block mt-1 w-full form-control"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
+                <x-input id="password" class="block mt-1 w-full form-control" type="password" name="password" required autocomplete="current-password" />
             </div>
 
             <div class="block mt-4">
