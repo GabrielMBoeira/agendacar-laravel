@@ -9,14 +9,14 @@ Route::get('/', function () {
     return view('site.site');
 });
 
-// Business
-Route::get('business-create', [Business::class, 'create'])->name('business.create');
-Route::post('business-store', [Business::class, 'store'])->name('business.store');
+// // Business
+// Route::get('business-create', [Business::class, 'create'])->name('business.create');
+// Route::post('business-store', [Business::class, 'store'])->name('business.store');
 
 
 //Dashboard
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 
