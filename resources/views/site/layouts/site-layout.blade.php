@@ -44,12 +44,12 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="{{ url('/') }}">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#about">Sobre</a></li>
-                    <li><a class="nav-link scrollto" href="#services">Serviços</a></li>
-                    <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
-                    <li><a class="nav-link scrollto" href="#team">Equipe</a></li>
-                    <li><a class="nav-link scrollto" href="#contact">Contato</a></li>
+                    <li><a class="nav-link scrollto" href="{{ url('/') }}">Home</a></li>
+                    <li><a class="nav-link scrollto" href="#">Sobre</a></li>
+                    <li><a class="nav-link scrollto" href="#">Serviços</a></li>
+                    <li><a class="nav-link scrollto" href="#">Portfolio</a></li>
+                    <li><a class="nav-link scrollto" href="#">Equipe</a></li>
+                    <li><a class="nav-link scrollto" href="#">Contato</a></li>
                     @guest
                         <li><a class="getstarted scrollto" href=" {{ route('register') }} ">Cadastre-se</a></li>
                         <li><a class="getstarted scrollto" href="{{ url('/login') }}">Login</a></li>
