@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <title>Dashboard Agendacar</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../admin/img/favicon.png" rel="icon">
+  <link href="../assets/img/logo.png" rel="icon">
   <link href="../admin/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -33,39 +33,37 @@
 
 <body>
 
-  <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="../admin/img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+      <a href="#" class="logo d-flex align-items-center toggle-sidebar-btn">
+        <img src="../assets/img/logo.png" alt="">
+        <span class="d-none d-lg-block">AgendaCar</span>
       </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div><!-- End Logo -->
+    </div>
 
-    <div class="search-bar">
+    {{-- <div class="search-bar">
       <form class="search-form d-flex align-items-center" method="POST" action="#">
         <input type="text" name="query" placeholder="Search" title="Enter search keyword">
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
       </form>
-    </div><!-- End Search Bar -->
+    </div> --}}
 
-    <nav class="header-nav ms-auto">
+    {{-- <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
         <li class="nav-item d-block d-lg-none">
           <a class="nav-link nav-icon search-bar-toggle " href="#">
             <i class="bi bi-search"></i>
           </a>
-        </li><!-- End Search Icon-->
+        </li>
 
         <li class="nav-item dropdown">
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
             <span class="badge bg-primary badge-number">4</span>
-          </a><!-- End Notification Icon -->
+          </a>
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
@@ -131,17 +129,16 @@
               <a href="#">Show all notifications</a>
             </li>
 
-          </ul><!-- End Notification Dropdown Items -->
+          </ul>
 
-        </li><!-- End Notification Nav -->
+        </li>
 
         <li class="nav-item dropdown">
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-chat-left-text"></i>
             <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
-
+          </a>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
             <li class="dropdown-header">
               You have 3 new messages
@@ -197,16 +194,15 @@
               <a href="#">Show all messages</a>
             </li>
 
-          </ul><!-- End Messages Dropdown Items -->
+          </ul>
 
-        </li><!-- End Messages Nav -->
-
+        </li>
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="../admin/img/profile-img.jpg" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
-          </a><!-- End Profile Iamge Icon -->
+          </a>
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
@@ -254,13 +250,12 @@
               </a>
             </li>
 
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
-
+          </ul>
+        </li>
       </ul>
-    </nav><!-- End Icons Navigation -->
+    </nav> --}}
 
-  </header><!-- End Header -->
+  </header>
 
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
@@ -268,20 +263,31 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="index.html">
-          <i class="bi bi-grid"></i>
+        <a class="nav-link " href="dashboard">
+            <i class="bi bi-window"></i>
           <span>Dashboard</span>
         </a>
-      </li><!-- End Dashboard Nav -->
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link " href="dashboard">
+            <i class="bi bi-person-add"></i>
+          <span>Cadastrar profissional</span>
+        </a>
+      </li>
+
+
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
+            <i class="bi bi-gear"></i>
+          <span>Configurações</span>
+          <i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="components-alerts.html">
-              <i class="bi bi-circle"></i><span>Alerts</span>
+                <i class="bi bi-person-add"></i><span>Cadastrar profisional</span>
             </a>
           </li>
           <li>
@@ -350,9 +356,9 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Components Nav -->
+      </li>
 
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -378,7 +384,7 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Forms Nav -->
+      </li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
@@ -396,7 +402,7 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Tables Nav -->
+      </li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
@@ -419,7 +425,7 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Charts Nav -->
+      </li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
@@ -442,62 +448,62 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Icons Nav -->
+      </li> --}}
 
-      <li class="nav-heading">Pages</li>
+      {{-- <li class="nav-heading">Pages</li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="users-profile.html">
           <i class="bi bi-person"></i>
-          <span>Profile</span>
+          <span>Perfil</span>
         </a>
-      </li><!-- End Profile Page Nav -->
+      </li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-faq.html">
           <i class="bi bi-question-circle"></i>
           <span>F.A.Q</span>
         </a>
-      </li><!-- End F.A.Q Page Nav -->
+      </li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-contact.html">
           <i class="bi bi-envelope"></i>
           <span>Contact</span>
         </a>
-      </li><!-- End Contact Page Nav -->
+      </li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-register.html">
           <i class="bi bi-card-list"></i>
           <span>Register</span>
         </a>
-      </li><!-- End Register Page Nav -->
+      </li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-login.html">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Login</span>
         </a>
-      </li><!-- End Login Page Nav -->
+      </li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-error-404.html">
           <i class="bi bi-dash-circle"></i>
           <span>Error 404</span>
         </a>
-      </li><!-- End Error 404 Page Nav -->
+      </li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-blank.html">
           <i class="bi bi-file-earmark"></i>
           <span>Blank</span>
         </a>
-      </li><!-- End Blank Page Nav -->
+      </li>
 
-    </ul>
+    </ul> --}}
 
-  </aside><!-- End Sidebar-->
+  </aside>
 
   <main id="main" class="main">
 
@@ -509,16 +515,14 @@
           <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </nav>
-    </div><!-- End Page Title -->
+    </div>
 
     <section class="section dashboard">
       <div class="row">
 
-        <!-- Left side columns -->
         <div class="col-lg-8">
           <div class="row">
 
-            <!-- Sales Card -->
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card sales-card">
 
@@ -551,9 +555,8 @@
                 </div>
 
               </div>
-            </div><!-- End Sales Card -->
+            </div>
 
-            <!-- Revenue Card -->
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card revenue-card">
 
@@ -586,9 +589,8 @@
                 </div>
 
               </div>
-            </div><!-- End Revenue Card -->
+            </div>
 
-            <!-- Customers Card -->
             <div class="col-xxl-4 col-xl-12">
 
               <div class="card info-card customers-card">
@@ -623,9 +625,8 @@
                 </div>
               </div>
 
-            </div><!-- End Customers Card -->
+            </div>
 
-            <!-- Reports -->
             <div class="col-12">
               <div class="card">
 
@@ -645,7 +646,6 @@
                 <div class="card-body">
                   <h5 class="card-title">Reports <span>/Today</span></h5>
 
-                  <!-- Line Chart -->
                   <div id="reportsChart"></div>
 
                   <script>
@@ -700,14 +700,13 @@
                       }).render();
                     });
                   </script>
-                  <!-- End Line Chart -->
+
 
                 </div>
 
               </div>
-            </div><!-- End Reports -->
+            </div>
 
-            <!-- Recent Sales -->
             <div class="col-12">
               <div class="card recent-sales overflow-auto">
 
@@ -779,9 +778,8 @@
                 </div>
 
               </div>
-            </div><!-- End Recent Sales -->
+            </div>
 
-            <!-- Top Selling -->
             <div class="col-12">
               <div class="card top-selling overflow-auto">
 
@@ -853,15 +851,13 @@
                 </div>
 
               </div>
-            </div><!-- End Top Selling -->
+            </div>
 
           </div>
-        </div><!-- End Left side columns -->
+        </div>
 
-        <!-- Right side columns -->
         <div class="col-lg-4">
 
-          <!-- Recent Activity -->
           <div class="card">
             <div class="filter">
               <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -887,7 +883,7 @@
                   <div class="activity-content">
                     Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
                   </div>
-                </div><!-- End activity item-->
+                </div>
 
                 <div class="activity-item d-flex">
                   <div class="activite-label">56 min</div>
@@ -895,7 +891,7 @@
                   <div class="activity-content">
                     Voluptatem blanditiis blanditiis eveniet
                   </div>
-                </div><!-- End activity item-->
+                </div>
 
                 <div class="activity-item d-flex">
                   <div class="activite-label">2 hrs</div>
@@ -903,7 +899,7 @@
                   <div class="activity-content">
                     Voluptates corrupti molestias voluptatem
                   </div>
-                </div><!-- End activity item-->
+                </div>
 
                 <div class="activity-item d-flex">
                   <div class="activite-label">1 day</div>
@@ -911,7 +907,7 @@
                   <div class="activity-content">
                     Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a> tempore
                   </div>
-                </div><!-- End activity item-->
+                </div>
 
                 <div class="activity-item d-flex">
                   <div class="activite-label">2 days</div>
@@ -919,7 +915,7 @@
                   <div class="activity-content">
                     Est sit eum reiciendis exercitationem
                   </div>
-                </div><!-- End activity item-->
+                </div>
 
                 <div class="activity-item d-flex">
                   <div class="activite-label">4 weeks</div>
@@ -927,14 +923,14 @@
                   <div class="activity-content">
                     Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
                   </div>
-                </div><!-- End activity item-->
+                </div>
 
               </div>
 
             </div>
-          </div><!-- End Recent Activity -->
+          </div>
 
-          <!-- Budget Report -->
+
           <div class="card">
             <div class="filter">
               <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -1006,9 +1002,8 @@
               </script>
 
             </div>
-          </div><!-- End Budget Report -->
+          </div>
 
-          <!-- Website Traffic -->
           <div class="card">
             <div class="filter">
               <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -1084,9 +1079,8 @@
               </script>
 
             </div>
-          </div><!-- End Website Traffic -->
+          </div>
 
-          <!-- News & Updates Traffic -->
           <div class="card">
             <div class="filter">
               <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -1135,31 +1129,26 @@
                   <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos eius...</p>
                 </div>
 
-              </div><!-- End sidebar recent posts-->
+              </div>
 
             </div>
-          </div><!-- End News & Updates -->
+          </div>
 
-        </div><!-- End Right side columns -->
+        </div>
 
       </div>
     </section>
 
-  </main><!-- End #main -->
+  </main>
 
-  <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
       &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      Designed by <a href="#">Agendacar</a>
     </div>
-  </footer><!-- End Footer -->
+  </footer>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
