@@ -14,10 +14,16 @@ Route::get('/', function () {
 // Route::post('business-store', [Business::class, 'store'])->name('business.store');
 
 
-//Dashboard
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+
+    Route::get('/register_professional', function () {
+        return view('admin.register_professional');
+    })->name('admin.register_professional');
+});
 
 
 // Socialite
@@ -26,4 +32,4 @@ Route::get('login/facebook/callback', [SocialiteController::class, 'handleProvid
 Route::get('login/google', [SocialiteController::class, 'redirectToProviderGoogle'])->name('socialite.redirectToProviderGoogle');
 Route::get('login/google/callback', [SocialiteController::class, 'handleProviderCallbackGoogle'])->name('socialite.handleProviderCallbackGoogle');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
