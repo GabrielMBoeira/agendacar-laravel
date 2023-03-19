@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Business;
+use App\Http\Controllers\ProfessionalController;
 use App\Http\Controllers\SocialiteController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -20,9 +21,16 @@ Route::middleware(['auth'])->group(function () {
         return view('admin.dashboard');
     })->name('dashboard');
 
+
+
+    //Professional
     Route::get('/register_professional', function () {
         return view('admin.register_professional');
     })->name('admin.register_professional');
+
+    Route::post('/store_professional', [ProfessionalController::class, 'store'])->name('admin.store_professional');
+
+
 });
 
 
