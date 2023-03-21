@@ -29,7 +29,7 @@ class ProfessionalController extends Controller
         }
 
         if ($count == 0) {
-            dd('Preencher pelo menos 1 serviÁo');
+            return redirect()->route('admin.register_professional')->with('service_null', 'Cadastre pelo menos 01 (um) servi√ßo!');
         }
 
 

@@ -22,6 +22,13 @@
     @endif
 
     <section class="my-5">
+
+        @if (session('service_null'))
+            <div class="alert alert-danger" role="alert">
+                {{ session('service_null') }}
+            </div>
+        @endif
+
         <div class="col-12">
             <form action="{{ route('admin.store_professional') }}" method="post">
                 @csrf
