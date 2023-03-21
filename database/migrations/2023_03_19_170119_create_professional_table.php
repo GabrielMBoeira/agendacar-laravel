@@ -16,6 +16,9 @@ class CreateProfessionalTable extends Migration
         Schema::create('professionals', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->date('date_start');
+            $table->date('date_end');
+            $table->time('interval');
             $table->string('service1')->nullable();
             $table->time('time_service1')->nullable();
             $table->string('service2')->nullable();
