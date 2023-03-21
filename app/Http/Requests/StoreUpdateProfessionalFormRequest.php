@@ -29,6 +29,11 @@ class StoreUpdateProfessionalFormRequest extends FormRequest
             'date_start' => 'required|date|before_or_equal:date_end',
             'date_end' => 'required|date',
             'interval' => 'required',
+            'time_service1' => 'required_with:service1',
+            'time_service2' => 'required_with:service2',
+            'time_service3' => 'required_with:service3',
+            'time_service4' => 'required_with:service4',
+            'time_service5' => 'required_with:service5'
         ];
     }
 
@@ -38,6 +43,17 @@ class StoreUpdateProfessionalFormRequest extends FormRequest
             'date_start' => 'periodo de atendimento (inicio)',
             'date_end' => 'periodo de atendimento (fim)',
             'interval' => 'intervalo entre horarios',
+            'interval' => 'intervalo entre horarios',
+            'time_service1' => 'tempo de atendimento do servico 1',
+            'time_service2' => 'tempo de atendimento do servico 2',
+            'time_service3' => 'tempo de atendimento do servico 3',
+            'time_service4' => 'tempo de atendimento do servico 4',
+            'time_service5' => 'tempo de atendimento do servico 5',
+            'service1' => 'servico 1',
+            'service2' => 'servico 2',
+            'service3' => 'servico 3',
+            'service4' => 'servico 4',
+            'service5' => 'servico 5'
         ];
     }
 }

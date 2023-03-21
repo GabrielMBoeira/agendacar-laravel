@@ -29,7 +29,7 @@ class ProfessionalController extends Controller
         }
 
         if ($count == 0) {
-            dd('preencher pelo menos um campo');
+            dd('Preencher pelo menos 1 serviço');
         }
 
 
