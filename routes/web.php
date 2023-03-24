@@ -22,13 +22,11 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
 
-
-    //Professional
-    Route::get('/register_professional', function () {
-        return view('admin.register_professional');
-    })->name('admin.register_professional');
-
-    Route::post('/store_professional', [ProfessionalController::class, 'store'])->name('admin.store_professional');
+    Route::get('/professionals/create', [ProfessionalController::class, 'create'])->name('admin.professionals.create');
+    Route::post('/professionals', [ProfessionalController::class, 'store'])->name('admin.professionals.store');
+    Route::get('/professionals/{id}/edit', [ProfessionalController::class, 'edit'])->name('admin.professionals.edit');
+    Route::get('/professionals', [ProfessionalController::class, 'index'])->name('admin.professionals.index');
+    // Route::get('/edit_professional', [ProfessionalController::class, 'edit'])->name('admin.professional.edit');
 
 
 });

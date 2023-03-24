@@ -1259,3 +1259,18 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+
+/*--------------------------------------------------------------
+#professionals
+--------------------------------------------------------------*/
+
+.agenda-card {
+    padding: 20px 0 15px 0;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #012970;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

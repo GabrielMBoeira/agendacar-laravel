@@ -56,13 +56,20 @@
                     @endguest
                     @auth
                         <li>
-                            <form action="{{ url('logout') }}" method="post" >
+                            <a class="getstarted scrollto" href="dashboard">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <form action="{{ url('logout') }}" method="post">
                                 @csrf
-                                <a class="getstarted scrollto" href="logout" onclick="event.preventDefault(); this.closest('form').submit();">
+                                <a class="getstarted scrollto" href="logout"
+                                    onclick="event.preventDefault(); this.closest('form').submit();">
                                     Sair
                                 </a>
                             </form>
                         </li>
+
                     @endauth
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>

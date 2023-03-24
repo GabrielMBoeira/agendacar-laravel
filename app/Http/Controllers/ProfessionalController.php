@@ -8,6 +8,20 @@ use Symfony\Component\VarDumper\VarDumper;
 
 class ProfessionalController extends Controller
 {
+    public function index() {
+
+        $user = auth()->user();
+
+        return view('admin.professionals', compact('user'));
+
+    }
+
+    public function create() {
+
+        return view('admin.professionals_create');
+
+    }
+
     public function store(StoreUpdateProfessionalFormRequest $request)
     {
 
@@ -29,7 +43,7 @@ class ProfessionalController extends Controller
         }
 
         if ($count == 0) {
-            return redirect()->route('admin.register_professional')->with('service_null', 'Cadastre pelo menos 01 (um) serviço!');
+            return redirect()->route('admin.professionals.create')->with('service_null', 'Cadastre pelo menos 01 (um) serviço!');
         }
 
 
@@ -52,6 +66,17 @@ class ProfessionalController extends Controller
         $professional->user_id = $user->id;
         $professional->save();
 
-        return redirect()->route('admin.register_professional')->with('msg', 'Profissional cadastrado com sucesso!');
+        return redirect()->route('admin.professionals.create')->with('msg', 'Profissional cadastrado com sucesso!');
     }
+
+    public function edit($id) {
+
+        if (!$professional = Professional::find($id)) {
+            return redirect()->route('admin.professionals.index');
+        }
+
+        return view('admin.professionals_show', compact('professional'));
+
+    }
+
 }

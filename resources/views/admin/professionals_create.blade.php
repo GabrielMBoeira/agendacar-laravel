@@ -30,7 +30,7 @@
         @endif
 
         <div class="col-12">
-            <form action="{{ route('admin.store_professional') }}" method="post">
+            <form action="{{ route('admin.professionals.store') }}" method="post">
                 @csrf
                 @method('POST')
 
