@@ -4,22 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUpdateProfessionalFormRequest;
 use App\Models\Professional;
+use Illuminate\Http\Request;
 use Symfony\Component\VarDumper\VarDumper;
 
 class ProfessionalController extends Controller
 {
-    public function index() {
+    public function index()
+    {
 
         $user = auth()->user();
 
         return view('admin.professionals', compact('user'));
-
     }
 
-    public function create() {
+    public function create()
+    {
 
         return view('admin.professionals_create');
-
     }
 
     public function store(StoreUpdateProfessionalFormRequest $request)
@@ -69,14 +70,25 @@ class ProfessionalController extends Controller
         return redirect()->route('admin.professionals.create')->with('msg', 'Profissional cadastrado com sucesso!');
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
 
-        if (!$professional = Professional::find($id)) {
-            return redirect()->route('admin.professionals.index');
+        if (!$professional = Professional::findOrFail($id)) {
+            return redirect()->route('admin.professionals');
         }
 
-        return view('admin.professionals_show', compact('professional'));
-
+        return view('admin.professionals_edit', compact('professional'));
     }
 
+    public function update(Request $request)
+    {
+
+        if (!$professional = Professional::findOrFail($request->id)) {
+            return redirect()->route('admin.professionals');
+        }
+
+        $professional->update($request->all());
+
+        return redirect()->route('admin.professionals.index')->with('msg', 'Profissional editado com sucesso!');
+    }
 }

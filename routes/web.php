@@ -24,7 +24,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/professionals/create', [ProfessionalController::class, 'create'])->name('admin.professionals.create');
     Route::post('/professionals', [ProfessionalController::class, 'store'])->name('admin.professionals.store');
-    Route::get('/professionals/{id}/edit', [ProfessionalController::class, 'edit'])->name('admin.professionals.edit');
+    Route::get('/professionals/{id}', [ProfessionalController::class, 'edit'])->name('admin.professionals.edit');
+    Route::put('/professionals/{id}', [ProfessionalController::class, 'update'])->name('admin.professionals.update');
     Route::get('/professionals', [ProfessionalController::class, 'index'])->name('admin.professionals.index');
     // Route::get('/edit_professional', [ProfessionalController::class, 'edit'])->name('admin.professional.edit');
 
