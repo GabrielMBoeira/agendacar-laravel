@@ -124,4 +124,12 @@ class ProfessionalController extends Controller
 
         return redirect()->route('admin.professionals.index')->with('msg', 'Profissional alterado com sucesso!');
     }
+
+    public function destroy($id) {
+
+        Professional::findOrFail($id)->delete();
+
+        return redirect()->route('admin.professionals.index')->with('msg', 'Profissional deletado com sucesso!');
+
+    }
 }

@@ -65,7 +65,13 @@
                                 <button class="btn btn-sm btn-success">Editar</button>
                             </a>
                             <a href="#" class="card-link">
-                                <button class="btn btn-sm btn-danger">Delete</button>
+
+                                <form action="{{ route('admin.professionals.destroy', $professional->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-sm btn-danger">Deletar</button>
+                                </form>
+
                             </a>
 
                         </div>

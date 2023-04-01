@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/professionals/{id}', [ProfessionalController::class, 'edit'])->name('admin.professionals.edit');
     Route::put('/professionals/{id}', [ProfessionalController::class, 'update'])->name('admin.professionals.update');
     Route::get('/professionals', [ProfessionalController::class, 'index'])->name('admin.professionals.index');
-    // Route::get('/edit_professional', [ProfessionalController::class, 'edit'])->name('admin.professional.edit');
+    Route::delete('/professionals/{id}', [ProfessionalController::class, 'destroy'])->name('admin.professionals.destroy');
 
 
 });
