@@ -33,7 +33,13 @@ class StoreUpdateProfessionalFormRequest extends FormRequest
             'time_service2' => 'required_with:service2',
             'time_service3' => 'required_with:service3',
             'time_service4' => 'required_with:service4',
-            'time_service5' => 'required_with:service5'
+            'time_service5' => 'required_with:service5',
+            'service1' => 'required_with:time_service1',
+            'service2' => 'required_with:time_service2',
+            'service3' => 'required_with:time_service3',
+            'service4' => 'required_with:time_service4',
+            'service5' => 'required_with:time_service5'
+
         ];
     }
 
