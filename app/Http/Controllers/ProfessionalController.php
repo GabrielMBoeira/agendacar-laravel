@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUpdateProfessionalFormRequest;
 use App\Models\Professional;
-use Illuminate\Http\Request;
-use Symfony\Component\VarDumper\VarDumper;
 
 class ProfessionalController extends Controller
 {
@@ -73,9 +71,7 @@ class ProfessionalController extends Controller
     public function edit($id)
     {
 
-        if (!$professional = Professional::findOrFail($id)) {
-            return redirect()->route('admin.professionals');
-        }
+        $professional = Professional::findOrFail($id);
 
         return view('admin.professionals_edit', compact('professional'));
     }
@@ -83,9 +79,7 @@ class ProfessionalController extends Controller
     public function update(StoreUpdateProfessionalFormRequest $request)
     {
 
-        if (!$professional = Professional::findOrFail($request->id)) {
-            return redirect()->route('admin.professionals');
-        }
+        $professional = Professional::findOrFail($request->id);
 
         $data = [
             $request->service1,

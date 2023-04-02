@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\Business;
 use App\Http\Controllers\ProfessionalController;
 use App\Http\Controllers\SocialiteController;
 use Illuminate\Support\Facades\Route;
-use Laravel\Socialite\Facades\Socialite;
+
 
 Route::get('/', function () {
     return view('site.site');
@@ -20,6 +21,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('dashboard');
+
+
+    Route::get('agenda/{id}', [AgendaController::class, 'index'])->name('admin.agenda.index');
 
 
     Route::get('/professionals/create', [ProfessionalController::class, 'create'])->name('admin.professionals.create');

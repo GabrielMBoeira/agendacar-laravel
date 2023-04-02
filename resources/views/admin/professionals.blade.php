@@ -61,19 +61,19 @@
                             <li class="list-group-item">{{ $professional->service5 }} - @if ($professional->time_service5) {{ date('H:i', strtotime($professional->time_service5)) }} @endif </li>
                         </ul>
                         <div class="card-body d-flex justify-content-around mt-2">
+                            <a href="{{ route('admin.agenda.index', $professional->id) }}" class="card-link">
+                                <button class="btn btn-sm btn-primary">Agenda</button>
+                            </a>
                             <a href="{{ route('admin.professionals.edit', $professional->id) }}" class="card-link">
                                 <button class="btn btn-sm btn-success">Editar</button>
                             </a>
                             <a href="#" class="card-link">
-
                                 <form action="{{ route('admin.professionals.destroy', $professional->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-sm btn-danger">Deletar</button>
                                 </form>
-
                             </a>
-
                         </div>
                     </div>
                 @endforeach
