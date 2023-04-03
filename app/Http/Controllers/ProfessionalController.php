@@ -131,13 +131,17 @@ class ProfessionalController extends Controller
     public function destroy($id)
     {
         try {
+
             Professional::findOrFail($id)->delete();
+
         } catch (\Illuminate\Database\QueryException $ex) {
+
             $errorCode = $ex->errorInfo[1];
+
             if ($errorCode == 1451) {
-                // return response()->json(['message' => 'Não é possível excluir este profissional porque ele tem agendamentos associados.'], 400);
                 return redirect()->route('admin.professionals.index')->with('msg', 'Não é possível excluir este profissional porque ele tem agendamentos associados.');
             }
+
         }
 
         return redirect()->route('admin.professionals.index')->with('msg', 'Profissional deletado com sucesso!');

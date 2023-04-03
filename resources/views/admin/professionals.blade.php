@@ -4,10 +4,6 @@
 
 @section('content')
 
-    {{-- {{ $user }} --}}
-    {{-- {{ $professional }} --}}
-
-
     @if (session('msg'))
         <!-- Modal -->
         <div class="modal fade" id="modalMessage" tabindex="-1" role="dialog" aria-labelledby="modalMessageTitle"
