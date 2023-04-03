@@ -36,7 +36,7 @@
                     <div class="card col-md-4" style="width: 18rem; border: solid 1px #000; margin: 10px">
                         {{-- <img src="..." class="card-img-top" alt="..."> --}}
                         <div class="card-body overflow-auto">
-                            <h5 class="card-title">{{ $professional->name }}</h5>
+                            <h5 class="card-title">{{$professional->id . '-'. $professional->name }}</h5>
                             <p class="card-text">
                             <div class="agenda-card">
                                 <div>
