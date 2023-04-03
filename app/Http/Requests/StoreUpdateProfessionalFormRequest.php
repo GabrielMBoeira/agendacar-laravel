@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\validateDatesOneMonth;
 use App\Rules\validateDatesOneYear;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,7 +27,7 @@ class StoreUpdateProfessionalFormRequest extends FormRequest
     {
         $rules = [
             'name' => 'required',
-            'date_start' => ['required','date','before_or_equal:date_end', new validateDatesOneYear],
+            'date_start' => ['required','date','before_or_equal:date_end', new validateDatesOneMonth],
             'date_end' => 'required|date',
             'interval' => 'required',
             'time_service1' => 'required_with:service1',

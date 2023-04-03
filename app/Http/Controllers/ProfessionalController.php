@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUpdateProfessionalFormRequest;
+use App\Models\Agenda;
 use App\Models\Professional;
+use Carbon\Carbon;
+use DateTime;
+use Illuminate\Support\Facades\DB;
 
 class ProfessionalController extends Controller
 {
@@ -65,6 +69,8 @@ class ProfessionalController extends Controller
         $professional->user_id = $user->id;
         $professional->save();
 
+        // $this->insertDatesInAgenda($professional->id, $professional->user_id, $request->date_start, $request->date_end, $request->interval);
+
         return redirect()->route('admin.professionals.create')->with('msg', 'Profissional cadastrado com sucesso!');
     }
 
@@ -119,11 +125,94 @@ class ProfessionalController extends Controller
         return redirect()->route('admin.professionals.index')->with('msg', 'Profissional alterado com sucesso!');
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
 
         Professional::findOrFail($id)->delete();
 
         return redirect()->route('admin.professionals.index')->with('msg', 'Profissional deletado com sucesso!');
+    }
+
+    function insertDatesInAgenda($professional_id, $user_id, $date_start, $date_end, $interval)
+    {
+
+        // $date_start_obj = new DateTime($date_start);
+        // $date_end_obj = new DateTime($date_end);
+        // $diff = $date_start_obj->diff($date_end_obj);
+        // $qtdDays = $diff->days;
+
+
+
+        // // var_dump($interval);
+        // // echo '<br>';
+        // // var_dump(substr($interval, 3, 4));
+        // // die;
+
+        // //Loop Days
+        // for ($i = 0; $i <= $qtdDays; $i++) {
+        //     $data_agenda = $date_start_obj->format('Y-m-d');
+
+        //     $horarios = array();
+        //     $inicio = strtotime('08:00');
+        //     $fim = strtotime('18:00');
+
+        //     // Loop Intervals
+        //     for ($j = 0; $inicio <= $fim; $j++) {
+
+        //         if (substr($interval, 0, 2) == '00') {
+
+        //             //Minuto
+        //             $horarios[] = date('H:i', $inicio);
+        //             $inicio = strtotime('+'.substr($interval, 3, 4).' minutes', $inicio);
+
+        //             // dd($professional_id);
+
+        //             // $agenda = new Agenda();
+
+        //             // $agenda->$professional_id = $professional_id;
+        //             // $agenda->$user_id = $user_id;
+        //             // $agenda->date = $data_agenda;
+        //             // $agenda->hour = $horarios[$j];
+        //             // $agenda->save();
+
+        //             // echo '<br>';
+        //             // var_dump($data_agenda);
+        //             // echo '<br>';
+
+        //             // echo '<br>';
+        //             // var_dump($horarios[$j]);
+        //             // echo '<br>';
+        //         } else {
+
+        //             //Hora
+        //             $horarios[] = date('H:i', $inicio);
+        //             $inicio = strtotime('+1 hour', $inicio);
+
+        //             $agenda = new Agenda();
+
+
+        //             // $agenda->$professional_id = 'professional_id';
+        //             // $agenda->$user_id = 'user_id';
+        //             // $agenda->date = $data_agenda;
+        //             // $agenda->hour = $horarios[$j];
+        //             // $agenda->save();
+
+        //             // echo '<br>';
+        //             // var_dump($data_agenda);
+        //             // echo '<br>';
+
+        //             // echo '<br>';
+        //             // var_dump($horarios[$j]);
+        //             // echo '<br>';
+        //         }
+
+
+
+        //     }
+
+
+        //     $date_start_obj->modify('+1 day');
+        // }
 
     }
 }
