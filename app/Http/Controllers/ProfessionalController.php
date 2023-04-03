@@ -69,7 +69,10 @@ class ProfessionalController extends Controller
         $professional->user_id = $user->id;
         $professional->save();
 
-        // $this->insertDatesInAgenda($professional->id, $professional->user_id, $request->date_start, $request->date_end, $request->interval);
+        //Recuperando o id do professional inserido.
+        // $professional->id;
+
+        $this->insertDatesInAgenda($professional->id, $request->date_start, $request->date_end, $request->interval);
 
         return redirect()->route('admin.professionals.create')->with('msg', 'Profissional cadastrado com sucesso!');
     }
@@ -133,86 +136,55 @@ class ProfessionalController extends Controller
         return redirect()->route('admin.professionals.index')->with('msg', 'Profissional deletado com sucesso!');
     }
 
-    function insertDatesInAgenda($professional_id, $user_id, $date_start, $date_end, $interval)
+    function insertDatesInAgenda($professional_id, $date_start, $date_end, $interval)
     {
+        $date_start_obj = new DateTime($date_start);
+        $date_end_obj = new DateTime($date_end);
+        $diff = $date_start_obj->diff($date_end_obj);
+        $qtdDays = $diff->days;
 
-        // $date_start_obj = new DateTime($date_start);
-        // $date_end_obj = new DateTime($date_end);
-        // $diff = $date_start_obj->diff($date_end_obj);
-        // $qtdDays = $diff->days;
+        //Loop Days
+        for ($i = 0; $i <= $qtdDays; $i++) {
 
+            $agenda_date = $date_start_obj->format('Y-m-d');
+            $hours = array();
+            $hour_initial = strtotime('08:00');
+            $hour_final = strtotime('18:00');
 
+            // Loop Intervals
+            for ($j = 0; $hour_initial <= $hour_final; $j++) {
 
-        // // var_dump($interval);
-        // // echo '<br>';
-        // // var_dump(substr($interval, 3, 4));
-        // // die;
+                $agenda = new Agenda();
 
-        // //Loop Days
-        // for ($i = 0; $i <= $qtdDays; $i++) {
-        //     $data_agenda = $date_start_obj->format('Y-m-d');
+                if (substr($interval, 0, 2) == '00') {
 
-        //     $horarios = array();
-        //     $inicio = strtotime('08:00');
-        //     $fim = strtotime('18:00');
+                    //Minuto
+                    $hours[] = date('H:i', $hour_initial);
+                    $hour_initial = strtotime('+'.substr($interval, 3, 4).' minutes', $hour_initial);
 
-        //     // Loop Intervals
-        //     for ($j = 0; $inicio <= $fim; $j++) {
+                    $agenda->professional_id = $professional_id;
+                    $agenda->date = $agenda_date;
+                    $agenda->hour = $hours[$j];
+                    $agenda->status = 'active';
+                    $agenda->save();
 
-        //         if (substr($interval, 0, 2) == '00') {
+                } else {
 
-        //             //Minuto
-        //             $horarios[] = date('H:i', $inicio);
-        //             $inicio = strtotime('+'.substr($interval, 3, 4).' minutes', $inicio);
+                    //Hora
+                    $hours[] = date('H:i', $hour_initial);
+                    $hour_initial = strtotime('+'.substr($interval, 0, 2).' hour', $hour_initial);
 
-        //             // dd($professional_id);
+                    $agenda->professional_id = $professional_id;
+                    $agenda->date = $agenda_date;
+                    $agenda->hour = $hours[$j];
+                    $agenda->status = 'active';
+                    $agenda->save();
+                }
 
-        //             // $agenda = new Agenda();
+            }
 
-        //             // $agenda->$professional_id = $professional_id;
-        //             // $agenda->$user_id = $user_id;
-        //             // $agenda->date = $data_agenda;
-        //             // $agenda->hour = $horarios[$j];
-        //             // $agenda->save();
-
-        //             // echo '<br>';
-        //             // var_dump($data_agenda);
-        //             // echo '<br>';
-
-        //             // echo '<br>';
-        //             // var_dump($horarios[$j]);
-        //             // echo '<br>';
-        //         } else {
-
-        //             //Hora
-        //             $horarios[] = date('H:i', $inicio);
-        //             $inicio = strtotime('+1 hour', $inicio);
-
-        //             $agenda = new Agenda();
-
-
-        //             // $agenda->$professional_id = 'professional_id';
-        //             // $agenda->$user_id = 'user_id';
-        //             // $agenda->date = $data_agenda;
-        //             // $agenda->hour = $horarios[$j];
-        //             // $agenda->save();
-
-        //             // echo '<br>';
-        //             // var_dump($data_agenda);
-        //             // echo '<br>';
-
-        //             // echo '<br>';
-        //             // var_dump($horarios[$j]);
-        //             // echo '<br>';
-        //         }
-
-
-
-        //     }
-
-
-        //     $date_start_obj->modify('+1 day');
-        // }
-
+            $date_start_obj->modify('+1 day');
+        }
     }
+
 }

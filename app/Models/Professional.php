@@ -35,4 +35,9 @@ class Professional extends Model
         return $this->belongsTo('App\Models\User');
     }
 
+    public function agendas() {
+        return $this->hasMany('App\Models\Agenda');
+    }
+
+
 }
