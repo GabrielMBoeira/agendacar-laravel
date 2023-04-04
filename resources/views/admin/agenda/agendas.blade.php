@@ -5,7 +5,6 @@
 @section('content')
 
 
-
     @if (session('msg'))
         <!-- Modal -->
         <div class="modal fade" id="modalMessage" tabindex="-1" role="dialog" aria-labelledby="modalMessageTitle"
@@ -23,90 +22,41 @@
         </div>
     @endif
 
-    <section class="my-5">
+    <section class="my-1" >
 
         <div class="col-12">
 
             <div class="row">
 
                 <div class="card-body">
-                    <h5 class="card-title">Datas cadastradas <span>| Today</span></h5>
+                    <h5 class="card-title">Agenda {{ $professional_name }} <span>| Today</span></h5>
 
                     <table class="table table-borderless datatable">
                         <thead>
                             <tr>
                                 <th scope="col">Data</th>
-                                <th scope="col">Horário</th>
-                                <th scope="col">Cliente</th>
-                                <th scope="col">E-mail</th>
-                                <th scope="col">Serviço</th>
-                                <th scope="col">Status</th>
-                                <th scope="col"></th>
+                                <th scope="col">Agenda</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            @foreach ($agendas as $agenda)
 
-                                <tr>
+                            @foreach ($agendas as $date)
 
-
-                                    <th scope="row"><a href="#">{{ date('d/m/Y', strtotime($agenda->date)) }}</a>
-                                    </th>
-                                    <td>Brandon Jacob</td>
-                                    <td>gabrielmboeira@gmail.com</td>
-                                    <td>$64</td>
-                                    <td><span>aksfjçlaskjdfçlakjsdçflajsçdflkjass</span></td>
-                                    <td><span class="badge bg-success">Approved</span></td>
-                                    <td>
-                                        <a href="#">
-                                            <button class="badge bg-primary"><i class="bi bi-eye"></i></button>
-                                        </a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td scope="row">
+                                   {{ $date->date }}
+                                </td>
+                                <td>
+                                    <a href="#">
+                                        <button class="badge bg-primary"><i class="bi bi-eye"></i></button>
+                                    </a>
+                                </td>
+                            </tr>
 
                             @endforeach
 
-                            {{-- <tr>
-                                <th scope="row"><a href="#">#2147</a></th>
-                                <td>Bridie Kessler</td>
-                                <td><a href="#" class="text-primary">Blanditiis dolor omnis
-                                        similique</a></td>
-                                <td>$47</td>
-                                <td><span class="badge bg-warning">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><a href="#">#2049</a></th>
-                                <td>Ashleigh Langosh</td>
-                                <td><a href="#" class="text-primary">At recusandae
-                                        consectetur</a></td>
-                                <td>$147</td>
-                                <td><span class="badge bg-success">Approved</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><a href="#">#2644</a></th>
-                                <td>Angus Grady</td>
-                                <td><a href="#" class="text-primar">Ut voluptatem id earum
-                                        et</a></td>
-                                <td>$67</td>
-                                <td><span class="badge bg-danger">Rejected</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><a href="#">#2644</a></th>
-                                <td>Raheem Lehner</td>
-                                <td><a href="#" class="text-primary">Sunt similique
-                                        distinctio</a></td>
-                                <td>$165</td>
-                                <td><span class="badge bg-success">Approved</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><a href="#">#2644</a></th>
-                                <td>Raheem Lehner</td>
-                                <td><a href="#" class="text-primary">Sunt similique
-                                        distinctio</a></td>
-                                <td>$165</td>
-                                <td><span class="badge bg-success">Approved</span></td>
-                            </tr> --}}
+
                         </tbody>
                     </table>
 
