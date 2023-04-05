@@ -23,7 +23,8 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
 
-    Route::get('agenda/{id}', [AgendaController::class, 'index'])->name('admin.agenda.index');
+    Route::get('agenda/{professional_id}', [AgendaController::class, 'index'])->name('admin.agenda.index');
+    Route::get('agenda-view/{date}/{professional_id}', [AgendaController::class, 'view'])->name('admin.agenda.view');
 
 
     Route::get('/professionals/create', [ProfessionalController::class, 'create'])->name('admin.professionals.create');

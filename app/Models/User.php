@@ -44,6 +44,6 @@ class User extends Authenticatable
     ];
 
     public function professionals() {
-        return $this->hasMany('App\Models\Professional');
+        return $this->hasMany(Professional::class);
     }
 }

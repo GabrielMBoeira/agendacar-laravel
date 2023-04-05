@@ -10,6 +10,6 @@ class Agenda extends Model
     use HasFactory;
 
     public function professional() {
-        $this->belongsTo('App\Models\Professional');
+        return $this->belongsTo(Professional::class);
     }
 }

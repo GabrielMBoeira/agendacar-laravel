@@ -7,16 +7,24 @@ use App\Models\Professional;
 
 class AgendaController extends Controller
 {
-    public function index($id)
+    public function index($professional_id)
     {
-        $professional = Professional::findOrFail($id);
-        $professional_name = mb_convert_case($professional->name, MB_CASE_TITLE, "UTF-8");
+        $professional = Professional::findOrFail($professional_id);
 
-        $agendas = Agenda::where('professional_id', '=', $id)
-                            ->groupBy('date')
-                            ->get();
+        $agendas = Agenda::where('professional_id', $professional_id)
+            ->groupBy('date')
+            ->get();
 
-        return view('admin.agenda.agendas', ['professional_name' => $professional_name, 'agendas' => $agendas]);
+        return view('admin.agenda.agendas', ['professional' => $professional, 'agendas' => $agendas]);
+    }
 
+    public function view($date, $professional_id)
+    {
+        $agendas = Agenda::where('date', '=', $date)
+            ->where('professional_id', '=', $professional_id)->get();
+
+        $professional = Professional::findOrFail($professional_id);
+
+        return view('admin.agenda.agenda_view', compact('agendas', 'professional'));
     }
 }
