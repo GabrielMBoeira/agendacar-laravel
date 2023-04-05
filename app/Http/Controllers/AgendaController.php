@@ -27,4 +27,12 @@ class AgendaController extends Controller
 
         return view('admin.agenda.agenda_view', compact('agendas', 'professional'));
     }
+
+    public function scheduling($id_agenda)
+    {
+        $scheduling = Agenda::findOrFail($id_agenda);
+        $professional = $scheduling->professional;
+
+        return view('admin.agenda.agenda_scheduling', compact('scheduling', 'professional'));
+    }
 }

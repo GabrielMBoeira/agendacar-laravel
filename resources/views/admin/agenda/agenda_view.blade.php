@@ -13,6 +13,7 @@
                     <table class="table table-borderless datatable">
                         <thead>
                             <tr>
+                                <th scope="col">ID</th>
                                 <th scope="col">Data</th>
                                 <th scope="col">Hora</th>
                                 <th scope="col">Cliente</th>
@@ -28,13 +29,14 @@
 
                             @foreach ($agendas as $agenda)
                                 <tr>
+                                    <td scope="row"> {{ $agenda->id }} </td>
                                     <td scope="row"> {{ date('d/m/Y', strtotime($agenda->date)) }} </td>
                                     <td scope="row"> {{ date('H:i', strtotime($agenda->hour)) }} </td>
-                                    <td scope="row"> Cliente </td>
-                                    <td scope="row"> Email </td>
-                                    <td scope="row"> Service </td>
+                                    <td scope="row"> {{  $agenda->client ?? '-'}} </td>
+                                    <td scope="row"> {{ $agenda->email ?? '-'}} </td>
+                                    <td scope="row"> {{ $agenda->service ?? '-'}} </td>
                                     <td scope="row"><span class="badge bg-success">{{ $agenda->status }}</span></td>
-                                    <td scope="row"><button class="btn btn-sm btn-primary"><i class="bi bi-person-plus"></i></button></td>
+                                    <td scope="row"><a href="{{ route('admin.agenda.scheduling', $agenda->id) }}" class="btn btn-sm btn-primary"><i class="bi bi-person-plus"></i></a></td>
                                     <td scope="row"><button class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></button></td>
                                     <td scope="row"><button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button></td>
                                 </tr>

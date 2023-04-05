@@ -3,6 +3,7 @@
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\Business;
 use App\Http\Controllers\ProfessionalController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SocialiteController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,15 +24,25 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
 
+    Route::get('services-index/{professional_id}', [ServiceController::class, 'index'])->name('admin.services.index');
+    Route::get('services-edit/{service_id}', [ServiceController::class, 'edit'])->name('admin.services.edit');
+    Route::put('services/{service_id}', [ServiceController::class, 'update'])->name('admin.services.update');
+    Route::delete('services/{service_id}', [ServiceController::class, 'destroy'])->name('admin.services.destroy');
+
+
+    Route::get('/client', [AgendaController::class, 'view'])->name('admin.agenda.view');
+
+
     Route::get('agenda/{professional_id}', [AgendaController::class, 'index'])->name('admin.agenda.index');
     Route::get('agenda-view/{date}/{professional_id}', [AgendaController::class, 'view'])->name('admin.agenda.view');
+    Route::get('agenda-scheduling/{id_agenda}', [AgendaController::class, 'scheduling'])->name('admin.agenda.scheduling');
 
 
     Route::get('/professionals/create', [ProfessionalController::class, 'create'])->name('admin.professionals.create');
-    Route::post('/professionals', [ProfessionalController::class, 'store'])->name('admin.professionals.store');
-    Route::get('/professionals/{id}', [ProfessionalController::class, 'edit'])->name('admin.professionals.edit');
+    // Route::get('/professionals/{id}', [ProfessionalController::class, 'edit'])->name('admin.professionals.edit');
     Route::put('/professionals/{id}', [ProfessionalController::class, 'update'])->name('admin.professionals.update');
     Route::get('/professionals', [ProfessionalController::class, 'index'])->name('admin.professionals.index');
+    Route::post('/professionals', [ProfessionalController::class, 'store'])->name('admin.professionals.store');
     Route::delete('/professionals/{id}', [ProfessionalController::class, 'destroy'])->name('admin.professionals.destroy');
 
 

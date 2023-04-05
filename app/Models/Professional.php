@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Professional extends Model
 {
     use HasFactory;
+
     protected $table = 'professionals';
 
     protected $fillable = [
@@ -37,6 +38,11 @@ class Professional extends Model
 
     public function agendas() {
         return $this->hasMany(Agenda::class);
+
+    }
+
+    public function services() {
+        return $this->hasMany(Service::class);
     }
 
 

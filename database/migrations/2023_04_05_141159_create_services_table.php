@@ -1,11 +1,10 @@
 <?php
 
-use App\Models\Professional;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAgendasTable extends Migration
+class CreateServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,15 +13,12 @@ class CreateAgendasTable extends Migration
      */
     public function up()
     {
-        Schema::create('agendas', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('professional_id')->constrained('professionals')->onDelete('cascade');
-            $table->date('date');
-            $table->time('hour');
-            $table->string('client')->nullable();
-            $table->string('email')->nullable();
-            $table->string('service')->nullable();
-            $table->string('status');
+            $table->string('service');
+            $table->time('time_service');
             $table->timestamps();
         });
     }
@@ -34,6 +30,6 @@ class CreateAgendasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('agendas');
+        Schema::dropIfExists('services');
     }
 }

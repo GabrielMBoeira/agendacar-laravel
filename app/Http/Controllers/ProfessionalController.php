@@ -5,17 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUpdateProfessionalFormRequest;
 use App\Models\Agenda;
 use App\Models\Professional;
-use Carbon\Carbon;
+use App\Models\Service;
 use DateTime;
-use Illuminate\Support\Facades\DB;
 
 class ProfessionalController extends Controller
 {
     public function index()
     {
-
         $user = auth()->user();
-        $professionals = Professional::all();
+        $professionals = Professional::where('user_id', $user->id)->with('services')->get();
 
         return view('admin.professionals', compact('user', 'professionals'));
     }
@@ -50,21 +48,19 @@ class ProfessionalController extends Controller
             return redirect()->route('admin.professionals.create')->with('service_null', 'Cadastre pelo menos 01 (um) serviço!');
         }
 
+        $services = [
+            strtoupper($request->service1) => $request->time_service1,
+            strtoupper($request->service2) => $request->time_service2,
+            strtoupper($request->service3) => $request->time_service3,
+            strtoupper($request->service4) => $request->time_service4,
+            strtoupper($request->service5) => $request->time_service5,
+        ];
+
         $professional = new Professional();
         $professional->name = strtoupper($request->name);
         $professional->date_start = $request->date_start;
         $professional->date_end = $request->date_end;
         $professional->interval = $request->interval;
-        $professional->service1 = strtoupper($request->service1);
-        $professional->time_service1 = $request->time_service1;
-        $professional->service2 = strtoupper($request->service2);
-        $professional->time_service2 = $request->time_service2;
-        $professional->service3 = strtoupper($request->service3);
-        $professional->time_service3 = $request->time_service3;
-        $professional->service4 = strtoupper($request->service4);
-        $professional->time_service4 = $request->time_service4;
-        $professional->service5 = strtoupper($request->service5);
-        $professional->time_service5 = $request->time_service5;
         $professional->status = 'active';
         $professional->user_id = $user->id;
         $professional->save();
@@ -73,6 +69,7 @@ class ProfessionalController extends Controller
         // $professional->id;
 
         $this->insertDatesInAgenda($professional->id, $request->date_start, $request->date_end, $request->interval);
+        $this->insertService($user->id, $professional->id, $services);
 
         return redirect()->route('admin.professionals.create')->with('msg', 'Profissional cadastrado com sucesso!');
     }
@@ -195,6 +192,23 @@ class ProfessionalController extends Controller
             }
 
             $date_start_obj->modify('+1 day');
+        }
+    }
+
+    function insertService($user_id, $professional_id, $services)
+    {
+        foreach ($services as $service => $time_service) {
+
+            if ($service && $time_service) {
+
+                $modelService = new Service();
+                $modelService->user_id = $user_id;
+                $modelService->professional_id = $professional_id;
+                $modelService->service = $service;
+                $modelService->time_service = $time_service;
+                $modelService->save();
+            }
+
         }
     }
 
