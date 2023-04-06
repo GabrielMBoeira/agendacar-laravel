@@ -48,6 +48,30 @@ class AgendaController extends Controller
         $scheduling->updated_at = date('Y-m-d H:i:s', $request->server('REQUEST_TIME'));
         $scheduling->save();
 
-        return redirect()->route('admin.agenda.show', $request->agenda_id)->with('msg', 'Agendamento cadastrado com sucesso!');
+        $date = $scheduling->date;
+        $professional_id =  $scheduling->professional_id;
+
+        return redirect()->route('admin.agenda.view', compact('date', 'professional_id'))->with('msg', 'Agendamento cadastrado com sucesso!');
+    }
+
+    public function destroy($agenda_id) {
+
+        try {
+
+            $agenda = Agenda::findOrFail($agenda_id);
+            $agenda->delete();
+
+        } catch (\Illuminate\Database\QueryException $ex) {
+
+            $errorCode = $ex->errorInfo[1];
+
+            if ($errorCode == 1451) {
+                return redirect()->route('admin.agenda.index', $agenda->professional_id)->with('msg', 'Não é possível excluir este agendamento.');
+            }
+
+        }
+
+        return redirect()->route('admin.agenda.view', [$agenda->date, $agenda->professional_id])->with('msg', 'Profissional deletado com sucesso!');
+
     }
 }

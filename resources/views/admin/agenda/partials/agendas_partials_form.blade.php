@@ -32,6 +32,15 @@
             @enderror
         </small>
     </div>
+    <div class="col-md-3">
+        <label for="scheduling_hour">Hora do agendamento</label>
+        <input type="time" class="form-control" name="scheduling_hour" value="{{ $scheduling->hour ?? old('scheduling_hour') }}" readonly>
+        <small class="text-danger">
+            @error('scheduling_hour')
+                {{ $message }}
+            @enderror
+        </small>
+    </div>
 </div>
 
 <div class="row mt-2">

@@ -37,8 +37,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('agenda/{professional_id}', [AgendaController::class, 'index'])->name('admin.agenda.index');
     Route::get('agenda-view/{date}/{professional_id}', [AgendaController::class, 'view'])->name('admin.agenda.view');
-    Route::get('scheduling/{id_agenda}', [AgendaController::class, 'show'])->name('admin.agenda.show');
-    Route::post('scheduling/{id_agenda}', [AgendaController::class, 'store'])->name('admin.agenda.store');
+    Route::get('agendas-show/{id_agenda}', [AgendaController::class, 'show'])->name('admin.agenda.show');
+    Route::post('agendas-show/{id_agenda}', [AgendaController::class, 'store'])->name('admin.agenda.store');
+    Route::delete('/agenda/{agenda_id}', [AgendaController::class, 'destroy'])->name('admin.agenda.destroy');
 
 
     Route::get('/professionals/create', [ProfessionalController::class, 'create'])->name('admin.professionals.create');
