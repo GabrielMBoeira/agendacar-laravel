@@ -22,9 +22,8 @@
     @endif
 
     <section class="my-3">
-
         <div class="col-12">
-            <form action="{{ route('admin.agenda.store', $scheduling->id) }}" method="post">
+            <form action="{{ route('admin.agenda.scheduling', $scheduling->id) }}" method="post">
                 @csrf
                 @method('POST')
                 @include('admin.agenda.partials.agendas_partials_form')
@@ -35,6 +34,7 @@
             </form>
         </div>
     </section>
+
 @endsection
 
 

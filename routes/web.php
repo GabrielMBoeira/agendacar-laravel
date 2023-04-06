@@ -35,19 +35,21 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('services/{service_id}', [ServiceController::class, 'destroy'])->name('admin.services.destroy');
 
 
+    Route::get('agendas-create', [AgendaController::class, 'create'])->name('admin.agenda.create');
+    Route::post('agendas-store', [AgendaController::class, 'store'])->name('admin.agenda.store');
     Route::get('agenda/{professional_id}', [AgendaController::class, 'index'])->name('admin.agenda.index');
     Route::get('agenda-view/{date}/{professional_id}', [AgendaController::class, 'view'])->name('admin.agenda.view');
     Route::get('agendas-show/{id_agenda}', [AgendaController::class, 'show'])->name('admin.agenda.show');
-    Route::post('agendas-show/{id_agenda}', [AgendaController::class, 'store'])->name('admin.agenda.store');
-    Route::delete('/agenda/{agenda_id}', [AgendaController::class, 'destroy'])->name('admin.agenda.destroy');
+    Route::post('agendas-show/{id_agenda}', [AgendaController::class, 'scheduling'])->name('admin.agenda.scheduling');
+    Route::delete('agenda/{agenda_id}', [AgendaController::class, 'destroy'])->name('admin.agenda.destroy');
 
 
-    Route::get('/professionals/create', [ProfessionalController::class, 'create'])->name('admin.professionals.create');
+    Route::get('professionals/create', [ProfessionalController::class, 'create'])->name('admin.professionals.create');
     // Route::get('/professionals/{id}', [ProfessionalController::class, 'edit'])->name('admin.professionals.edit');
-    Route::put('/professionals/{id}', [ProfessionalController::class, 'update'])->name('admin.professionals.update');
-    Route::get('/professionals', [ProfessionalController::class, 'index'])->name('admin.professionals.index');
-    Route::post('/professionals', [ProfessionalController::class, 'store'])->name('admin.professionals.store');
-    Route::delete('/professionals/{id}', [ProfessionalController::class, 'destroy'])->name('admin.professionals.destroy');
+    Route::put('professionals/{id}', [ProfessionalController::class, 'update'])->name('admin.professionals.update');
+    Route::get('professionals', [ProfessionalController::class, 'index'])->name('admin.professionals.index');
+    Route::post('professionals', [ProfessionalController::class, 'store'])->name('admin.professionals.store');
+    Route::delete('professionals/{id}', [ProfessionalController::class, 'destroy'])->name('admin.professionals.destroy');
 
 
 });

@@ -57,15 +57,23 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link " href="{{ route('admin.professionals.index') }}">
+                    <i class="bi bi-person-badge-fill"></i>
+                    <span>Profissionais cadastrados</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link " href="{{ route('admin.professionals.create') }}">
                     <i class="bi bi-person-add"></i>
                     <span>Cadastrar profissional</span>
                 </a>
             </li>
+
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('admin.professionals.index') }}">
-                    <i class="bi bi-person-badge-fill"></i>
-                    <span>Profissionais cadastrados</span>
+                <a class="nav-link " href="{{ route('admin.agenda.create') }}">
+                    <i class="bi bi-journal-check"></i>
+                    <span>Cadastrar agenda</span>
                 </a>
             </li>
 

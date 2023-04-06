@@ -31,8 +31,9 @@
                     </h5>
 
                     <div>
-                        <a href="{{ route('admin.services.create', $professional) }}" class="btn btn-primary my-2">Cadastrar
-                            Serviço</a>
+                        <a href="{{ route('admin.services.create', $professional) }}" class="btn btn-primary my-2">
+                            Cadastrar Serviço
+                        </a>
                     </div>
 
                     <table class="table table-borderless datatable">
