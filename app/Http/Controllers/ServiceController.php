@@ -22,13 +22,13 @@ class ServiceController extends Controller
         return view('admin.services.services_index', compact('services', 'professional'));
     }
 
-    public function create($professional_id)
+    public function create()
     {
 
-        $professional = Professional::findOrFail($professional_id);
-        $services = $professional->services;
+        $user = auth()->user();
+        $professionals = $user->professionals;
 
-        return view('admin.services.services_create', compact('professional', 'services'));
+        return view('admin.services.services_create', compact('professionals'));
     }
 
     public function store(StoreUpdateServiceFormRequest $request)
@@ -51,9 +51,10 @@ class ServiceController extends Controller
     {
 
         $service = Service::findOrFail($service_id);
-        $professional = $service->professional;
+        $user = auth()->user();
+        $professionals = $user->professionals;
 
-        return view('admin.services.services_edit', compact('service', 'professional'));
+        return view('admin.services.services_edit', compact('service', 'professionals'));
     }
 
     public function update(StoreUpdateServiceFormRequest $request)
@@ -63,7 +64,6 @@ class ServiceController extends Controller
         $model->service = mb_strtoupper($request->service, 'UTF-8');
         $model->time_service = $request->time_service;
         $model->save();
-
 
         return redirect()->route('admin.services.index', $request->professional_id)->with('msg', 'Serviço alterado com sucesso!');
     }

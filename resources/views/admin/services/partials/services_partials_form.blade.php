@@ -1,7 +1,12 @@
 <div class="row mt-2">
     <div class="col-md-6">
-        <label for="professional_name">Profissional</label>
-        <input type="text" class="form-control" name="professional_name" value="{{ $professional->name ?? old('professional_name') }}" readonly>
+        <label for="professional_name">Selecione um professional</label>
+
+        <select name="professional_id" id="professional_id" class="form-control">
+            @foreach ($professionals as $professional)
+                <option value="{{ $professional->id }}">{{ $professional->name }}</option>
+            @endforeach
+        </select>
         <small class="text-danger">
             @error('professional_name')
                 {{ $message }}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAgendaDate;
 use App\Models\Agenda;
 use App\Models\Professional;
 use DateTime;
@@ -29,7 +30,7 @@ class AgendaController extends Controller
         return view('admin.agenda.agendas_create', compact('professionals'));
     }
 
-    public function store(Request $request)
+    public function store(StoreAgendaDate $request)
     {
 
         $professional_id = $request->professional_id;

@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 
-@section('page', 'Cadastro do profissional')
+@section('page', 'Serviços')
 
 @section('content')
 
@@ -29,12 +29,6 @@
                     <h5 class="card-title">Serviços {{ mb_convert_case($professional->name, MB_CASE_TITLE, 'UTF-8') }}
                         <span> | Today</span>
                     </h5>
-
-                    <div>
-                        <a href="{{ route('admin.services.create', $professional) }}" class="btn btn-primary my-2">
-                            Cadastrar Serviço
-                        </a>
-                    </div>
 
                     <table class="table table-borderless datatable">
                         <thead>

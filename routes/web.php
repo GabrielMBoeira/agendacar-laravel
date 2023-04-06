@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/client', [AgendaController::class, 'view'])->name('admin.agenda.view');
 
 
-    Route::get('services-create/{professional_id}', [ServiceController::class, 'create'])->name('admin.services.create');
+    Route::get('services-create', [ServiceController::class, 'create'])->name('admin.services.create');
     Route::post('services-create', [ServiceController::class, 'store'])->name('admin.services.store');
     Route::get('services-index/{professional_id}', [ServiceController::class, 'index'])->name('admin.services.index');
     Route::get('services-edit/{service_id}', [ServiceController::class, 'edit'])->name('admin.services.edit');
@@ -50,7 +50,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('professionals', [ProfessionalController::class, 'index'])->name('admin.professionals.index');
     Route::post('professionals', [ProfessionalController::class, 'store'])->name('admin.professionals.store');
     Route::delete('professionals/{id}', [ProfessionalController::class, 'destroy'])->name('admin.professionals.destroy');
-
 
 });
 

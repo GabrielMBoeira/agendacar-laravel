@@ -78,6 +78,13 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link " href="{{ route('admin.services.create') }}">
+                    <i class="bi bi-hammer"></i>
+                    <span>Cadastrar Serviços</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-gear"></i>
                     <span>Configurações</span>
