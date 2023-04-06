@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 
-@section('page', 'Serviços')
+@section('page', 'Cadastro do profissional')
 
 @section('content')
 
@@ -8,7 +8,7 @@
         <!-- Modal -->
         <div class="modal fade" id="modalMessage" tabindex="-1" role="dialog" aria-labelledby="modalMessageTitle"
             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-cent  ered" role="document">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-body" style="background-color: #4154f1; color:#fff">
                         {{ session('msg') }}
@@ -21,7 +21,6 @@
         </div>
     @endif
 
-
     <section class="my-1">
         <div class="col-12">
             <div class="row">
@@ -32,7 +31,8 @@
                     </h5>
 
                     <div>
-                        <a href="{{ route('admin.services.create', $professional) }}" class="btn btn-primary my-2">Cadastrar Serviço</a>
+                        <a href="{{ route('admin.services.create', $professional) }}" class="btn btn-primary my-2">Cadastrar
+                            Serviço</a>
                     </div>
 
                     <table class="table table-borderless datatable">
