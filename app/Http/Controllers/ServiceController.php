@@ -38,7 +38,7 @@ class ServiceController extends Controller
         $model = new Service();
         $model->user_id = $user->id;
         $model->professional_id = $request->professional_id;
-        $model->service = $request->service;
+        $model->service = strtoupper($request->service);
         $model->time_service = $request->time_service;
         $model->save();
 
