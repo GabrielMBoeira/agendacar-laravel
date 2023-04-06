@@ -168,7 +168,14 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>@yield('page')</h1>
+            <div class="d-flex justify-content-between">
+                <h1>@yield('page')</h1>
+
+                @if (request()->path() != 'dashboard')
+                    <a href="{{ url()->previous() }}" class="btn btn-primary mx-5">Voltar</a>
+                @endif
+
+            </div>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
