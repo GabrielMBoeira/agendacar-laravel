@@ -1,9 +1,8 @@
 @extends('admin.layouts.layout')
 
-@section('page', 'Editar serviço')
+@section('page', 'Cadastro de serviço')
 
 @section('content')
-
 
     @if (session('msg'))
         <!-- Modal -->
@@ -22,31 +21,13 @@
         </div>
     @endif
 
-    <section class="my-4">
-
-        @if (session('service_null'))
-            <div class="alert alert-danger" role="alert">
-                {{ session('service_null') }}
-            </div>
-        @endif
+    <section class="my-3">
 
         <div class="col-12">
-            <form action="{{ route('admin.services.update', $service->id) }}" method="post">
+            <form action="{{ route('admin.services.store') }}" method="post">
                 @csrf
-                @method('PUT')
+                @method('POST')
                 <input type="hidden" name="professional_id" value="{{ $professional->id }}">
-                <div class="row mt-2">
-                    <div class="col-md-2">
-                        <label for="id">ID: Serviço</label>
-                        <input type="text" class="form-control" name="id" value="{{ $service->id ?? old('id') }}"
-                            readonly>
-                        <small class="text-danger">
-                            @error('id')
-                                {{ $message }}
-                            @enderror
-                        </small>
-                    </div>
-                </div>
                 @include('admin.services.partials.services_partials_form')
                 <div class="mt-3">
                     <button class="btn" style="background: #4154f1; border-radius: 4px; color: #fff;">Salvar</button>

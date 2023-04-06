@@ -11,11 +11,10 @@
             <div class="row">
 
                 @foreach ($professionals as $professional)
-
                     <div class="card col-md-4" style="width: 18rem; border: solid 1px #000; margin: 10px">
                         {{-- <img src="..." class="card-img-top" alt="..."> --}}
                         <div class="card-body overflow-auto">
-                            <h5 class="card-title">{{$professional->id . '-'. $professional->name }}</h5>
+                            <h5 class="card-title">{{ $professional->id . '-' . $professional->name }}</h5>
                             <p class="card-text">
                             <div class="agenda-card">
                                 <div>
@@ -34,12 +33,13 @@
                         </div>
                         <ul class="list-group list-group-flush">
 
-                            @foreach($professional->services as $service_and_time)
-                                <li class="list-group-item">{{ $service_and_time->service }} - {{ date('H:i', strtotime($service_and_time->time_service)) }} </li>
+                            @foreach ($professional->services as $service_and_time)
+                                <li class="list-group-item">{{ $service_and_time->service }} -
+                                    {{ date('H:i', strtotime($service_and_time->time_service)) }} </li>
                             @endforeach
 
                         </ul>
-                        <div class="card-body d-flex justify-content-around mt-2">
+                        <div class="card-body d-flex justify-content-around m-2">
                             <a href="{{ route('admin.agenda.index', $professional->id) }}" class="card-link">
                                 <button class="btn btn-sm btn-primary">Agenda</button>
                             </a>
@@ -55,7 +55,6 @@
                             </a>
                         </div>
                     </div>
-
                 @endforeach
 
             </div>

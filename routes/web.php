@@ -24,6 +24,8 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
 
+    Route::get('services-create/{professional_id}', [ServiceController::class, 'create'])->name('admin.services.create');
+    Route::post('services-create', [ServiceController::class, 'store'])->name('admin.services.store');
     Route::get('services-index/{professional_id}', [ServiceController::class, 'index'])->name('admin.services.index');
     Route::get('services-edit/{service_id}', [ServiceController::class, 'edit'])->name('admin.services.edit');
     Route::put('services/{service_id}', [ServiceController::class, 'update'])->name('admin.services.update');
