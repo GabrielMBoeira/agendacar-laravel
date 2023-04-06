@@ -24,6 +24,9 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
 
+    Route::get('/client', [AgendaController::class, 'view'])->name('admin.agenda.view');
+
+
     Route::get('services-create/{professional_id}', [ServiceController::class, 'create'])->name('admin.services.create');
     Route::post('services-create', [ServiceController::class, 'store'])->name('admin.services.store');
     Route::get('services-index/{professional_id}', [ServiceController::class, 'index'])->name('admin.services.index');
@@ -32,12 +35,10 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('services/{service_id}', [ServiceController::class, 'destroy'])->name('admin.services.destroy');
 
 
-    Route::get('/client', [AgendaController::class, 'view'])->name('admin.agenda.view');
-
-
     Route::get('agenda/{professional_id}', [AgendaController::class, 'index'])->name('admin.agenda.index');
     Route::get('agenda-view/{date}/{professional_id}', [AgendaController::class, 'view'])->name('admin.agenda.view');
-    Route::get('agenda-scheduling/{id_agenda}', [AgendaController::class, 'scheduling'])->name('admin.agenda.scheduling');
+    Route::get('scheduling/{id_agenda}', [AgendaController::class, 'show'])->name('admin.agenda.show');
+    Route::post('scheduling/{id_agenda}', [AgendaController::class, 'store'])->name('admin.agenda.store');
 
 
     Route::get('/professionals/create', [ProfessionalController::class, 'create'])->name('admin.professionals.create');

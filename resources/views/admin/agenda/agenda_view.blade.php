@@ -20,8 +20,7 @@
                                 <th scope="col">E-mail</th>
                                 <th scope="col">Serviço</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Incluir</th>
-                                <th scope="col">Editar</th>
+                                <th scope="col">Agenda</th>
                                 <th scope="col">Excluir</th>
                             </tr>
                         </thead>
@@ -36,8 +35,7 @@
                                     <td scope="row"> {{ $agenda->email ?? '-'}} </td>
                                     <td scope="row"> {{ $agenda->service ?? '-'}} </td>
                                     <td scope="row"><span class="badge bg-success">{{ $agenda->status }}</span></td>
-                                    <td scope="row"><a href="{{ route('admin.agenda.scheduling', $agenda->id) }}" class="btn btn-sm btn-primary"><i class="bi bi-person-plus"></i></a></td>
-                                    <td scope="row"><button class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></button></td>
+                                    <td scope="row"><a href="{{ route('admin.agenda.show', $agenda->id) }}" class="btn btn-sm btn-primary"><i class="bi bi-journal-check"></i></a></td>
                                     <td scope="row"><button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button></td>
                                 </tr>
                             @endforeach

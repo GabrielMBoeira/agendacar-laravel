@@ -60,7 +60,7 @@ class ServiceController extends Controller
     {
 
         $model = Service::findOrFail($request->id);
-        $model->service = strtoupper($request->service);
+        $model->service = mb_strtoupper($request->service, 'UTF-8');
         $model->time_service = $request->time_service;
         $model->save();
 
