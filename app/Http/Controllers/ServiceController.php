@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUpdateServiceFormRequest;
 use App\Models\Professional;
 use App\Models\Service;
 use App\Models\User;
@@ -30,7 +31,7 @@ class ServiceController extends Controller
         return view('admin.services.services_create', compact('professional', 'services'));
     }
 
-    public function store(Request $request)
+    public function store(StoreUpdateServiceFormRequest $request)
     {
 
         $user = auth()->user();
@@ -55,7 +56,7 @@ class ServiceController extends Controller
         return view('admin.services.services_edit', compact('service', 'professional'));
     }
 
-    public function update(Request $request)
+    public function update(StoreUpdateServiceFormRequest $request)
     {
 
         $model = Service::findOrFail($request->id);
