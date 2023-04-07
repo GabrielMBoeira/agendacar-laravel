@@ -27,13 +27,17 @@
 
             <div class="row">
 
+                @if ($professionals->count() == 0)
+                    <h5>Não existe profissionais cadsatrados</h5>
+                @endif
+
                 @foreach ($professionals as $professional)
                     <div class="card col-md-4" style="width: 18rem; border: solid 1px #000; margin: 10px">
                         {{-- <img src="..." class="card-img-top" alt="..."> --}}
                         <div class="card-body overflow-auto">
                             <h5 class="card-title">{{ $professional->id . '-' . $professional->name }}</h5>
                             <p class="card-text">
-                            <div class="agenda-card">
+                                {{-- <div class="agenda-card">
                                 <div>
                                     Agenda:
                                 </div>
@@ -44,7 +48,7 @@
                                     <span
                                         class="agenda-card-date">{{ date('d/m/Y', strtotime($professional->date_end)) }}</span>
                                 </div>
-                            </div>
+                            </div> --}}
                             </p>
 
                         </div>

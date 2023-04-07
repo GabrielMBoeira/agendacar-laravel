@@ -80,7 +80,7 @@
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('admin.services.create') }}">
                     <i class="bi bi-hammer"></i>
-                    <span>Cadastrar Serviços</span>
+                    <span>Cadastrar serviços</span>
                 </a>
             </li>
 

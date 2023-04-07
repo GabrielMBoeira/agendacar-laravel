@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAgendaDate;
 use App\Models\Agenda;
 use App\Models\Professional;
+use App\Models\Service;
 use DateTime;
 use Illuminate\Http\Request;
 
@@ -60,7 +61,9 @@ class AgendaController extends Controller
         $scheduling = Agenda::findOrFail($id_agenda);
         $professional = $scheduling->professional;
 
-        return view('admin.agenda.agendas_show', compact('scheduling', 'professional'));
+        $services = Service::where('professional_id', $professional->id)->get();
+
+        return view('admin.agenda.agendas_show', compact('scheduling', 'professional', 'services'));
     }
 
     public function scheduling(Request $request)
@@ -86,7 +89,6 @@ class AgendaController extends Controller
 
             $agenda = Agenda::findOrFail($agenda_id);
             $agenda->delete();
-
         } catch (\Illuminate\Database\QueryException $ex) {
 
             $errorCode = $ex->errorInfo[1];
@@ -123,19 +125,18 @@ class AgendaController extends Controller
 
                     //Minuto
                     $hours[] = date('H:i', $hour_initial);
-                    $hour_initial = strtotime('+'.substr($interval, 3, 4).' minutes', $hour_initial);
+                    $hour_initial = strtotime('+' . substr($interval, 3, 4) . ' minutes', $hour_initial);
 
                     $agenda->professional_id = $professional_id;
                     $agenda->date = $agenda_date;
                     $agenda->hour = $hours[$j];
                     $agenda->status = 'active';
                     $agenda->save();
-
                 } else {
 
                     //Hora
                     $hours[] = date('H:i', $hour_initial);
-                    $hour_initial = strtotime('+'.substr($interval, 0, 2).' hour', $hour_initial);
+                    $hour_initial = strtotime('+' . substr($interval, 0, 2) . ' hour', $hour_initial);
 
                     $agenda->professional_id = $professional_id;
                     $agenda->date = $agenda_date;
@@ -143,11 +144,25 @@ class AgendaController extends Controller
                     $agenda->status = 'active';
                     $agenda->save();
                 }
-
             }
 
             $date_start_obj->modify('+1 day');
         }
     }
 
+    public function clean($agenda_id)
+    {
+
+        $scheduling = Agenda::findOrFail($agenda_id);
+        $scheduling->client = '-';
+        $scheduling->email = '-';
+        $scheduling->service = '-';
+        $scheduling->save();
+
+        $date = $scheduling->date;
+        $professional_id =  $scheduling->professional_id;
+
+        return redirect()->route('admin.agenda.view', compact('date', 'professional_id'))->with('msg', 'Agenda limpa com sucesso!');
+
+    }
 }

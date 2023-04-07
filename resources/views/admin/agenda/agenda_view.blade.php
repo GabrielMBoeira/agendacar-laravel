@@ -40,6 +40,7 @@
                                 <th scope="col">Serviço</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Agenda</th>
+                                <th scope="col">Limpar</th>
                                 <th scope="col">Excluir</th>
                             </tr>
                         </thead>
@@ -57,7 +58,15 @@
                                             class="badge {{ $agenda->client ? 'bg-primary' : 'bg-success' }} ">{{ $agenda->client ? 'Ocupado' : 'Livre' }}</span>
                                     </td>
                                     <td scope="row"><a href="{{ route('admin.agenda.show', $agenda->id) }}"
-                                            class="btn btn-sm btn-primary"><i class="bi bi-journal-check"></i></a></td>
+                                            class="btn btn-sm btn-primary">
+                                            <i class="bi bi-journal-check"></i>
+                                        </a>
+                                    </td>
+                                    <td scope="row"><a href="{{ route('admin.agenda.clean', $agenda->id) }}"
+                                            class="btn btn-sm btn-warning">
+                                            <i class="bi bi-person-slash"></i>
+                                        </a>
+                                    </td>
                                     <td>
                                         <a href="#" class="card-link">
                                             <form action="{{ route('admin.agenda.destroy', $agenda->id) }}" method="post">

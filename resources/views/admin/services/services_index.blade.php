@@ -35,7 +35,7 @@
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Serviço</th>
-                                <th scope="col">Tempo cadastrado</th>
+                                <th scope="col">Tempo do serviço</th>
                                 <th scope="col">Editar</th>
                                 <th scope="col">Deletar</th>
                             </tr>
@@ -46,7 +46,7 @@
                                 <tr>
                                     <td scope="row">{{ $service->id }}</td>
                                     <td scope="row">{{ $service->service }}</td>
-                                    <td scope="row">{{ $service->time_service }}</td>
+                                    <td scope="row">{{ date('H:i', strtotime($service->time_service)) }}</td>
                                     <td scope="row">
                                         <a href="{{ route('admin.services.edit', $service->id) }}"
                                             class="btn btn-sm btn-warning">

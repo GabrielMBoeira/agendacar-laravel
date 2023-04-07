@@ -3,9 +3,15 @@
         <label for="professional_name">Selecione um professional</label>
 
         <select name="professional_id" id="professional_id" class="form-control">
-            @foreach ($professionals as $professional)
-                <option value="{{ $professional->id }}">{{ $professional->name }}</option>
-            @endforeach
+
+            @if ($professionals->count() > 0)
+                @foreach ($professionals as $professional)
+                    <option value="{{ $professional->id }}">{{ $professional->name }}</option>
+                @endforeach
+            @else
+                <option value="">Não há profissionais cadastrados</option>
+            @endif
+
         </select>
         <small class="text-danger">
             @error('professional_name')

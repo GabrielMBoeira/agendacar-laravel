@@ -21,7 +21,7 @@
         </div>
     @endif
 
-    <section class="my-5">
+    <section class="my-3">
 
         @if (session('service_null'))
             <div class="alert alert-danger" role="alert">
