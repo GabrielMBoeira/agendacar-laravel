@@ -37,6 +37,7 @@
                             <tr>
                                 <th scope="col">Data</th>
                                 <th scope="col">Agenda</th>
+                                <th scope="col">Deletar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,6 +50,16 @@
                                     <td>
                                         <a href="{{ route('admin.agenda.view', [$date->date, $professional->id]) }}">
                                             <button class="badge bg-primary"><i class="bi bi-eye"></i></button>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="card-link">
+                                            <form action="{{ route('admin.agenda.destroy.date', [$date->date, $professional->id]) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                            </form>
                                         </a>
                                     </td>
                                 </tr>

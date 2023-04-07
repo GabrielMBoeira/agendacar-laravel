@@ -163,6 +163,20 @@ class AgendaController extends Controller
         $professional_id =  $scheduling->professional_id;
 
         return redirect()->route('admin.agenda.view', compact('date', 'professional_id'))->with('msg', 'Agenda limpa com sucesso!');
+    }
+
+    public function destroyDate($date, $professional_id)
+    {
+
+        $schedulingDate = Agenda::where('date', '=', $date)->where('professional_id', '=', $professional_id)->get();
+
+        foreach ($schedulingDate as $scheduling) {
+            $scheduling->delete();
+        }
+
+        return redirect()->route('admin.agenda.index', compact('professional_id'))->with('msg', 'Data deletada com sucesso!');
 
     }
+
+
 }
