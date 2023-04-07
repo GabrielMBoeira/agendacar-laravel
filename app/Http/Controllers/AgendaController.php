@@ -154,9 +154,9 @@ class AgendaController extends Controller
     {
 
         $scheduling = Agenda::findOrFail($agenda_id);
-        $scheduling->client = '-';
-        $scheduling->email = '-';
-        $scheduling->service = '-';
+        $scheduling->client = null;
+        $scheduling->email = null;
+        $scheduling->service = null;
         $scheduling->save();
 
         $date = $scheduling->date;

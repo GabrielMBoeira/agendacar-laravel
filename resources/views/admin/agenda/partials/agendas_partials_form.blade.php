@@ -79,7 +79,7 @@
         <label for="service">Serviço</label>
         <select name="service" id="service" class="form-control">
             @foreach ($services as $service)
-                    <option value="{{ $service->id }}" {{ $service->id == $scheduling->service ? "selected" : '' }}>  {{ $service->service }} </option>
+                    <option value="{{ $service->service }}" {{ $service->service == $scheduling->service ? "selected" : '' }}>  {{ $service->service }} </option>
             @endforeach
         </select>
         <small class="text-danger">

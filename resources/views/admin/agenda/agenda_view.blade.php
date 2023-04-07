@@ -54,8 +54,10 @@
                                     <td scope="row"> {{ $agenda->client ?? '-' }} </td>
                                     <td scope="row"> {{ $agenda->email ?? '-' }} </td>
                                     <td scope="row"> {{ $agenda->service ?? '-' }} </td>
-                                    <td scope="row"><span
-                                            class="badge {{ $agenda->client ? 'bg-primary' : 'bg-success' }} ">{{ $agenda->client ? 'Ocupado' : 'Livre' }}</span>
+                                    <td scope="row">
+                                        <span class="badge {{ $agenda->client == null || $agenda->client == '-'  ? 'bg-success' : 'bg-primary' }} ">
+                                            {{ $agenda->client == null || $agenda->client == '-'  ? 'Livre' : 'Ocupado' }}
+                                        </span>
                                     </td>
                                     <td scope="row"><a href="{{ route('admin.agenda.show', $agenda->id) }}"
                                             class="btn btn-sm btn-primary">
