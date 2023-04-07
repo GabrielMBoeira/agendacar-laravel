@@ -28,28 +28,30 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('services-create', [ServiceController::class, 'create'])->name('admin.services.create');
-    Route::post('services-create', [ServiceController::class, 'store'])->name('admin.services.store');
     Route::get('services-index/{professional_id}', [ServiceController::class, 'index'])->name('admin.services.index');
     Route::get('services-edit/{service_id}', [ServiceController::class, 'edit'])->name('admin.services.edit');
+    Route::post('services-create', [ServiceController::class, 'store'])->name('admin.services.store');
     Route::put('services/{service_id}', [ServiceController::class, 'update'])->name('admin.services.update');
     Route::delete('services/{service_id}', [ServiceController::class, 'destroy'])->name('admin.services.destroy');
 
 
     Route::get('agendas-create', [AgendaController::class, 'create'])->name('admin.agenda.create');
-    Route::post('agendas-store', [AgendaController::class, 'store'])->name('admin.agenda.store');
+    Route::get('agendas-create-single', [AgendaController::class, 'createSingle'])->name('admin.agenda.create.single');
     Route::get('agendas-clean/{id_agenda}', [AgendaController::class, 'clean'])->name('admin.agenda.clean');
     Route::get('agenda/{professional_id}', [AgendaController::class, 'index'])->name('admin.agenda.index');
     Route::get('agenda-view/{date}/{professional_id}', [AgendaController::class, 'view'])->name('admin.agenda.view');
     Route::get('agendas-show/{id_agenda}', [AgendaController::class, 'show'])->name('admin.agenda.show');
     Route::post('agendas-show/{id_agenda}', [AgendaController::class, 'scheduling'])->name('admin.agenda.scheduling');
+    Route::post('agendas-store', [AgendaController::class, 'store'])->name('admin.agenda.store');
+    Route::post('agendas-store-single', [AgendaController::class, 'storeSingle'])->name('admin.agenda.store.single');
     Route::delete('agenda/{agenda_id}', [AgendaController::class, 'destroy'])->name('admin.agenda.destroy');
     Route::delete('agendas-destroy-date/{date}/{professional_id}', [AgendaController::class, 'destroyDate'])->name('admin.agenda.destroy.date');
 
 
     Route::get('professionals/create', [ProfessionalController::class, 'create'])->name('admin.professionals.create');
     // Route::get('/professionals/{id}', [ProfessionalController::class, 'edit'])->name('admin.professionals.edit');
-    Route::put('professionals/{id}', [ProfessionalController::class, 'update'])->name('admin.professionals.update');
     Route::get('professionals', [ProfessionalController::class, 'index'])->name('admin.professionals.index');
+    Route::put('professionals/{id}', [ProfessionalController::class, 'update'])->name('admin.professionals.update');
     Route::post('professionals', [ProfessionalController::class, 'store'])->name('admin.professionals.store');
     Route::delete('professionals/{id}', [ProfessionalController::class, 'destroy'])->name('admin.professionals.destroy');
 

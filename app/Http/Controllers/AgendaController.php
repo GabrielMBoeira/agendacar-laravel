@@ -41,14 +41,17 @@ class AgendaController extends Controller
 
         $this->insertDatesInAgenda($professional_id, $date_start, $date_end, $interval);
 
-        return redirect()->route('admin.agenda.index', compact('professional_id'))->with('msg', 'Agendamento cadastrado com sucesso!');
+        return redirect()->route('admin.agenda.index', compact('professional_id'))->with('msg', 'Agenda cadastrada com sucesso!');
     }
 
     public function view($date, $professional_id)
     {
 
         $agendas = Agenda::where('date', '=', $date)
-            ->where('professional_id', '=', $professional_id)->get();
+            ->where('professional_id', '=', $professional_id)
+            ->orderBy('date')
+            ->orderBy('hour')
+            ->get();
 
         $professional = Professional::findOrFail($professional_id);
 
@@ -175,8 +178,35 @@ class AgendaController extends Controller
         }
 
         return redirect()->route('admin.agenda.index', compact('professional_id'))->with('msg', 'Data deletada com sucesso!');
-
     }
 
+    public function createSingle()
+    {
 
+        $user = auth()->user();
+        $professionals = $user->professionals;
+
+        return view('admin.agenda.agendas_create_single', compact('professionals'));
+    }
+
+    public function storeSingle(Request $request)
+    {
+
+        $model = new Agenda();
+        $model->professional_id = $request->professional_id;
+        $model->date = $request->date;
+        $model->hour = $request->hour;
+        $model->status = 'active';
+        $model->save();
+
+        $agendas = Agenda::where('date', '=', $request->date)
+            ->where('professional_id', '=', $request->professional_id)
+            ->orderBy('date')
+            ->orderBy('hour')
+            ->get();
+
+        $professional = Professional::findOrFail($request->professional_id);
+
+        return view('admin.agenda.agenda_view', compact('agendas', 'professional'));
+    }
 }
