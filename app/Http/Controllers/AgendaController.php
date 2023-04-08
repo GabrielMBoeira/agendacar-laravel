@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAgendaDate;
+use App\Http\Requests\StoreUpdateAgendaSingleFormRequest;
 use App\Models\Agenda;
 use App\Models\Professional;
 use App\Models\Service;
@@ -189,8 +190,24 @@ class AgendaController extends Controller
         return view('admin.agenda.agendas_create_single', compact('professionals'));
     }
 
-    public function storeSingle(Request $request)
+    public function storeSingle(StoreUpdateAgendaSingleFormRequest $request)
     {
+        $agendas = Agenda::where('date', '=', $request->date)
+            ->where('professional_id', '=', $request->professional_id)
+            ->orderBy('date')
+            ->orderBy('hour')
+            ->get();
+
+        $date = date('d/m/Y', strtotime($request->date));
+        $hour = date('H:i:s', strtotime($request->hour));
+
+        foreach ($agendas as $agenda) {
+
+            if ($agenda->date == $request->date && $agenda->hour == $hour) {
+                return redirect()->route('admin.agenda.index', $request->professional_id)
+                    ->with('msg', "Já existe agenda criada com esta data e horário ($date - $request->hour h)! Cadastre uma agenda específica ou delete agendamento deste dia para criar lote e intervalos novamente!");
+            }
+        }
 
         $model = new Agenda();
         $model->professional_id = $request->professional_id;
@@ -199,14 +216,6 @@ class AgendaController extends Controller
         $model->status = 'active';
         $model->save();
 
-        $agendas = Agenda::where('date', '=', $request->date)
-            ->where('professional_id', '=', $request->professional_id)
-            ->orderBy('date')
-            ->orderBy('hour')
-            ->get();
-
-        $professional = Professional::findOrFail($request->professional_id);
-
-        return view('admin.agenda.agenda_view', compact('agendas', 'professional'));
+        return redirect()->route('admin.agenda.index', $request->professional_id)->with('msg', "Agenda do dia ($date - $request->hour h) foi cadastrada com sucesso.");
     }
 }
