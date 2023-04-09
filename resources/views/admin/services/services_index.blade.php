@@ -45,7 +45,7 @@
                             @foreach ($services as $service)
                                 <tr>
                                     <td scope="row">{{ $service->id }}</td>
-                                    <td scope="row">{{ $service->service }}</td>
+                                    <td scope="row">{{ mb_strtoupper($service->service, 'UTF-8') }}</td>
                                     <td scope="row">{{ date('H:i', strtotime($service->time_service)) }}</td>
                                     <td scope="row">
                                         <a href="{{ route('admin.services.edit', $service->id) }}"

@@ -51,8 +51,8 @@
                                     <td scope="row"> {{ $agenda->id }} </td>
                                     <td scope="row"> {{ date('d/m/Y', strtotime($agenda->date)) }} </td>
                                     <td scope="row"> {{ date('H:i', strtotime($agenda->hour)) }} </td>
-                                    <td scope="row"> {{ $agenda->client ?? '-' }} </td>
-                                    <td scope="row"> {{ $agenda->email ?? '-' }} </td>
+                                    <td scope="row"> {{ mb_strtoupper($agenda->client, 'UTF-8') ?? '-' }} </td>
+                                    <td scope="row"> {{ mb_strtoupper($agenda->email, 'UTF-8') ?? '-' }} </td>
                                     <td scope="row"> {{ $agenda->service ?? '-' }} </td>
                                     <td scope="row">
                                         <span class="badge {{ $agenda->client == null || $agenda->client == '-'  ? 'bg-success' : 'bg-primary' }} ">

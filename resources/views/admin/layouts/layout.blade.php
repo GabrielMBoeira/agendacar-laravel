@@ -50,28 +50,28 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('dashboard') }}">
+                <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                     <i class="bi bi-window"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('admin.professionals.index') }}">
+                <a class="nav-link collapsed" href="{{ route('admin.professionals.index') }}">
                     <i class="bi bi-person-badge-fill"></i>
                     <span>Profissionais cadastrados</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('admin.professionals.create') }}">
+                <a class="nav-link collapsed" href="{{ route('admin.professionals.create') }}">
                     <i class="bi bi-person-add"></i>
                     <span>Cadastrar profissional</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('admin.services.create') }}">
+                <a class="nav-link collapsed" href="{{ route('admin.services.create') }}">
                     <i class="bi bi-hammer"></i>
                     <span>Cadastrar serviços</span>
                 </a>
@@ -106,7 +106,7 @@
                 <li class="nav-item">
                     <form action="{{ url('logout') }}" method="post">
                         @csrf
-                        <a class="nav-link" href="logout" onclick="event.preventDefault(); this.closest('form').submit();">
+                        <a class="nav-link collapsed" href="logout" onclick="event.preventDefault(); this.closest('form').submit();">
                             <i class="bi bi-box-arrow-right"></i>
                             Sair
                         </a>
