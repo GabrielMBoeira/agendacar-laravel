@@ -82,8 +82,9 @@ class AgendaController extends Controller
     public function view($date, $professional_id)
     {
 
-        $agendas = Agenda::where('date', '=', $date)
-            ->where('professional_id', '=', $professional_id)
+        $agendas = Agenda::select(['agendas.*', 'services.id as service_id', 'services.service as service'])
+            ->leftJoin('services', 'services.id', '=', 'agendas.service')
+            ->where('agendas.professional_id', '=', $professional_id)
             ->orderBy('date')
             ->orderBy('hour')
             ->get();
