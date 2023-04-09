@@ -40,6 +40,40 @@ class AgendaController extends Controller
         $date_end = $request->date_end;
         $interval = $request->interval;
 
+        $date_start_obj = new DateTime($date_start);
+        $date_end_obj = new DateTime($date_end);
+        $diff = $date_start_obj->diff($date_end_obj);
+        $qtdDays = $diff->days;
+
+        $agendas = Agenda::where('date', '=', $date_start)
+            ->where('professional_id', '=', $professional_id)
+            ->get()
+            ->first();
+
+        $date = date('d/m/Y', strtotime($date_start));
+
+        if ($agendas && $agendas->date == $date_start) {
+
+            return redirect()->route('admin.agenda.index', compact('professional_id'))->with("msg", "Data informada ($date) já consta agendamento cadastrado!");
+        }
+
+        //Loop Days
+        for ($i = 0; $i <= $qtdDays; $i++) {
+
+            $agendas = Agenda::where('date', '=', $date_start_obj->format('Y-m-d'))
+                ->where('professional_id', '=', $professional_id)
+                ->get()
+                ->first();
+
+            if ($agendas) {
+
+                $date = date('d/m/Y', strtotime($agendas->date));
+                return redirect()->route('admin.agenda.index', compact('professional_id'))->with("msg", "Data informada ($date) já consta agenda cadastrada!");
+            }
+
+            $date_start_obj->modify('+1 day');
+        }
+
         $this->insertDatesInAgenda($professional_id, $date_start, $date_end, $interval);
 
         return redirect()->route('admin.agenda.index', compact('professional_id'))->with('msg', 'Agenda cadastrada com sucesso!');
@@ -102,7 +136,8 @@ class AgendaController extends Controller
             }
         }
 
-        return redirect()->route('admin.agenda.view', [$agenda->date, $agenda->professional_id])->with('msg', 'Agenda deletada com sucesso!');
+        return redirect()->route('admin.agenda.view', [$agenda->date, $agenda->professional_id]);
+        // return redirect()->route('admin.agenda.view', [$agenda->date, $agenda->professional_id])->with('msg', 'Agenda deletada com sucesso!');
     }
 
     function insertDatesInAgenda($professional_id, $date_start, $date_end, $interval)
@@ -178,7 +213,8 @@ class AgendaController extends Controller
             $scheduling->delete();
         }
 
-        return redirect()->route('admin.agenda.index', compact('professional_id'))->with('msg', 'Data deletada com sucesso!');
+        return redirect()->route('admin.agenda.index', compact('professional_id'));
+        // return redirect()->route('admin.agenda.index', compact('professional_id'))->with('msg', 'Data deletada com sucesso!');
     }
 
     public function createSingle()
@@ -217,5 +253,47 @@ class AgendaController extends Controller
         $model->save();
 
         return redirect()->route('admin.agenda.index', $request->professional_id)->with('msg', "Agenda do dia ($date - $request->hour h) foi cadastrada com sucesso.");
+    }
+
+    function checkExistDate($professional_id, $date_start, $date_end)
+    {
+        // $date_start_obj = new DateTime($date_start);
+        // $date_end_obj = new DateTime($date_end);
+        // $diff = $date_start_obj->diff($date_end_obj);
+        // $qtdDays = $diff->days;
+
+        // $agendas = Agenda::where('date', '=', $date_start)
+        //     ->where('professional_id', '=', $professional_id)
+        //     ->get()
+        //     ->first();
+
+        // $date = date('d/m/Y', strtotime($date_start));
+
+        // // dd($qtdDays);
+
+        // if ($agendas->date == $date_start) {
+
+        //     return true;
+
+        // } else {
+
+        //     return 'exist';
+
+
+
+
+        //     //Loop Days
+        //     for ($i = 0; $i <= $qtdDays; $i++) {
+
+        //         $agenda_date = $date_start_obj->format('Y-m-d');
+        //         echo '<br>';
+        //         echo $agenda_date;
+        //         echo '<br>';
+
+        //         $date_start_obj->modify('+1 day');
+        //     }
+        // }
+
+        // return die;
     }
 }
