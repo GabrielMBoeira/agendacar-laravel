@@ -16,6 +16,7 @@ class CreateAgendasTable extends Migration
     {
         Schema::create('agendas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('professional_id')->constrained('professionals')->onDelete('cascade');
             $table->date('date');
             $table->time('hour');

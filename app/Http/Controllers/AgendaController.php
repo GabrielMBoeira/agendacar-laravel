@@ -15,9 +15,12 @@ class AgendaController extends Controller
 {
     public function index($professional_id)
     {
-        $professional = Professional::findOrFail($professional_id);
+
+        $user = auth()->user();
+        $professional = Professional::where('user_id', $user->id)->findOrFail($professional_id);
 
         $agendas = Agenda::where('professional_id', $professional_id)
+            ->where('user_id', $user->id)
             ->groupBy('date')
             ->get();
 
@@ -36,6 +39,7 @@ class AgendaController extends Controller
     public function store(StoreAgendaDate $request)
     {
 
+        $user = auth()->user();
         $professional_id = $request->professional_id;
         $date_start = $request->date_start;
         $date_end = $request->date_end;
@@ -48,6 +52,7 @@ class AgendaController extends Controller
 
         $agendas = Agenda::where('date', '=', $date_start)
             ->where('professional_id', '=', $professional_id)
+            ->where('user_id', $user->id)
             ->get()
             ->first();
 
@@ -63,6 +68,7 @@ class AgendaController extends Controller
 
             $agendas = Agenda::where('date', '=', $date_start_obj->format('Y-m-d'))
                 ->where('professional_id', '=', $professional_id)
+                ->where('user_id', $user->id)
                 ->get()
                 ->first();
 
@@ -75,7 +81,7 @@ class AgendaController extends Controller
             $date_start_obj->modify('+1 day');
         }
 
-        $this->insertDatesInAgenda($professional_id, $date_start, $date_end, $interval);
+        $this->insertDatesInAgenda($user->id, $professional_id, $date_start, $date_end, $interval);
 
         return redirect()->route('admin.agenda.index', compact('professional_id'))->with('msg', 'Agenda cadastrada com sucesso!');
     }
@@ -83,15 +89,18 @@ class AgendaController extends Controller
     public function view($date, $professional_id)
     {
 
+        $user = auth()->user();
+
         $agendas = Agenda::select(['agendas.*', 'services.id as service_id', 'services.service as service'])
             ->leftJoin('services', 'services.id', '=', 'agendas.service')
             ->where('agendas.professional_id', '=', $professional_id)
             ->where('agendas.date', '=', $date)
+            ->where('agendas.user_id', '=', $user->id)
             ->orderBy('date')
             ->orderBy('hour')
             ->get();
 
-        $professional = Professional::findOrFail($professional_id);
+        $professional = Professional::where('user_id', $user->id)->findOrFail($professional_id);
 
         return view('admin.agenda.agenda_view', compact('agendas', 'professional'));
     }
@@ -99,17 +108,18 @@ class AgendaController extends Controller
     public function show($id_agenda)
     {
 
-        $scheduling = Agenda::findOrFail($id_agenda);
+        $user = auth()->user();
+        $scheduling = Agenda::where('user_id', $user->id)->findOrFail($id_agenda);
         $professional = $scheduling->professional;
 
-        $services = Service::where('professional_id', $professional->id)->get();
+        $services = Service::where('user_id', $user->id)->where('professional_id', $professional->id)->get();
 
         return view('admin.agenda.agendas_show', compact('scheduling', 'professional', 'services'));
     }
 
     public function scheduling(Request $request)
     {
-
+        $user = auth()->user();
         $service = Service::findOrFail($request->service);
         $request_hour_dt = DateTime::createFromFormat('H:i:s', $request->scheduling_hour);
         $scheduling_hour_dt = DateTime::createFromFormat('H:i:s', $request->scheduling_hour);
@@ -120,6 +130,7 @@ class AgendaController extends Controller
         $scheduling_add = $scheduling_hour_dt->add(new DateInterval('PT' . $hour . 'H' . $minute . 'M'));
 
         $schedulings = Agenda::where('professional_id',  $request->professional_id)
+            ->where('user_id', $user->id)
             ->where('date', $request->scheduling_date)->get();
 
         //Check conflito de horários
@@ -168,8 +179,8 @@ class AgendaController extends Controller
     {
 
         try {
-
-            $agenda = Agenda::findOrFail($agenda_id);
+            $user = auth()->user();
+            $agenda = Agenda::where('user_id', $user->id)->findOrFail($agenda_id);
             $agenda->delete();
         } catch (\Illuminate\Database\QueryException $ex) {
 
@@ -184,7 +195,7 @@ class AgendaController extends Controller
         // return redirect()->route('admin.agenda.view', [$agenda->date, $agenda->professional_id])->with('msg', 'Agenda deletada com sucesso!');
     }
 
-    function insertDatesInAgenda($professional_id, $date_start, $date_end, $interval)
+    function insertDatesInAgenda($user_id, $professional_id, $date_start, $date_end, $interval)
     {
         $date_start_obj = new DateTime($date_start);
         $date_end_obj = new DateTime($date_end);
@@ -210,6 +221,7 @@ class AgendaController extends Controller
                     $hours[] = date('H:i', $hour_initial);
                     $hour_initial = strtotime('+' . substr($interval, 3, 4) . ' minutes', $hour_initial);
 
+                    $agenda->user_id = $user_id;
                     $agenda->professional_id = $professional_id;
                     $agenda->date = $agenda_date;
                     $agenda->hour = $hours[$j];
@@ -221,6 +233,7 @@ class AgendaController extends Controller
                     $hours[] = date('H:i', $hour_initial);
                     $hour_initial = strtotime('+' . substr($interval, 0, 2) . ' hour', $hour_initial);
 
+                    $agenda->user_id = $user_id;
                     $agenda->professional_id = $professional_id;
                     $agenda->date = $agenda_date;
                     $agenda->hour = $hours[$j];
@@ -236,7 +249,8 @@ class AgendaController extends Controller
     public function clean($agenda_id)
     {
 
-        $scheduling = Agenda::findOrFail($agenda_id);
+        $user = auth()->user();
+        $scheduling = Agenda::where('user_id', $user->id)->findOrFail($agenda_id);
         $scheduling->client = null;
         $scheduling->email = null;
         $scheduling->service = null;
@@ -251,7 +265,8 @@ class AgendaController extends Controller
     public function destroyDate($date, $professional_id)
     {
 
-        $schedulingDate = Agenda::where('date', '=', $date)->where('professional_id', '=', $professional_id)->get();
+        $user = auth()->user();
+        $schedulingDate = Agenda::where('user_id', $user->id)->where('date', '=', $date)->where('professional_id', '=', $professional_id)->get();
 
         foreach ($schedulingDate as $scheduling) {
             $scheduling->delete();
@@ -272,7 +287,9 @@ class AgendaController extends Controller
 
     public function storeSingle(StoreUpdateAgendaSingleFormRequest $request)
     {
-        $agendas = Agenda::where('date', '=', $request->date)
+        $user = auth()->user();
+        $agendas = Agenda::where('user_id', $user->id)
+            ->where('date', '=', $request->date)
             ->where('professional_id', '=', $request->professional_id)
             ->orderBy('date')
             ->orderBy('hour')
@@ -290,6 +307,7 @@ class AgendaController extends Controller
         }
 
         $model = new Agenda();
+        $model->user_id = $user->id;
         $model->professional_id = $request->professional_id;
         $model->date = $request->date;
         $model->hour = $request->hour;
@@ -299,45 +317,4 @@ class AgendaController extends Controller
         return redirect()->route('admin.agenda.index', $request->professional_id)->with('msg', "Agenda do dia ($date - $request->hour h) foi cadastrada com sucesso.");
     }
 
-    function checkExistDate($professional_id, $date_start, $date_end)
-    {
-        // $date_start_obj = new DateTime($date_start);
-        // $date_end_obj = new DateTime($date_end);
-        // $diff = $date_start_obj->diff($date_end_obj);
-        // $qtdDays = $diff->days;
-
-        // $agendas = Agenda::where('date', '=', $date_start)
-        //     ->where('professional_id', '=', $professional_id)
-        //     ->get()
-        //     ->first();
-
-        // $date = date('d/m/Y', strtotime($date_start));
-
-        // // dd($qtdDays);
-
-        // if ($agendas->date == $date_start) {
-
-        //     return true;
-
-        // } else {
-
-        //     return 'exist';
-
-
-
-
-        //     //Loop Days
-        //     for ($i = 0; $i <= $qtdDays; $i++) {
-
-        //         $agenda_date = $date_start_obj->format('Y-m-d');
-        //         echo '<br>';
-        //         echo $agenda_date;
-        //         echo '<br>';
-
-        //         $date_start_obj->modify('+1 day');
-        //     }
-        // }
-
-        // return die;
-    }
 }

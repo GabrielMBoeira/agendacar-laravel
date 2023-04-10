@@ -68,7 +68,7 @@ class ProfessionalController extends Controller
         //Recuperando o id do professional inserido.
         // $professional->id;
 
-        $this->insertDatesInAgenda($professional->id, $request->date_start, $request->date_end, $request->interval);
+        $this->insertDatesInAgenda($user->id , $professional->id, $request->date_start, $request->date_end, $request->interval);
         $this->insertService($user->id, $professional->id, $services);
 
         return redirect()->route('admin.professionals.create')->with('msg', 'Profissional cadastrado com sucesso!');
@@ -77,15 +77,16 @@ class ProfessionalController extends Controller
     public function edit($id)
     {
 
-        $professional = Professional::findOrFail($id);
+        $user = auth()->user();
+        $professional = Professional::where('user_id', $user->user)->findOrFail($id);
 
         return view('admin.professionals_edit', compact('professional'));
     }
 
     public function update(StoreUpdateProfessionalFormRequest $request)
     {
-
-        $professional = Professional::findOrFail($request->id);
+        $user = auth()->user();
+        $professional = Professional::where('user_id', $user->id)->findOrFail($request->id);
 
         $data = [
             $request->service1,
@@ -129,7 +130,8 @@ class ProfessionalController extends Controller
     {
         try {
 
-            Professional::findOrFail($id)->delete();
+            $user = auth()->user();
+            Professional::where('user_id', $user->id)->findOrFail($id)->delete();
 
         } catch (\Illuminate\Database\QueryException $ex) {
 
@@ -144,7 +146,7 @@ class ProfessionalController extends Controller
         return redirect()->route('admin.professionals.index')->with('msg', 'Profissional deletado com sucesso!');
     }
 
-    function insertDatesInAgenda($professional_id, $date_start, $date_end, $interval)
+    function insertDatesInAgenda($user_id, $professional_id, $date_start, $date_end, $interval)
     {
         $date_start_obj = new DateTime($date_start);
         $date_end_obj = new DateTime($date_end);
@@ -170,6 +172,7 @@ class ProfessionalController extends Controller
                     $hours[] = date('H:i', $hour_initial);
                     $hour_initial = strtotime('+'.substr($interval, 3, 4).' minutes', $hour_initial);
 
+                    $agenda->user_id = $user_id;
                     $agenda->professional_id = $professional_id;
                     $agenda->date = $agenda_date;
                     $agenda->hour = $hours[$j];
@@ -182,6 +185,7 @@ class ProfessionalController extends Controller
                     $hours[] = date('H:i', $hour_initial);
                     $hour_initial = strtotime('+'.substr($interval, 0, 2).' hour', $hour_initial);
 
+                    $agenda->user_id = $user_id;
                     $agenda->professional_id = $professional_id;
                     $agenda->date = $agenda_date;
                     $agenda->hour = $hours[$j];
