@@ -26,6 +26,7 @@
             <form action="{{ route('admin.agenda.scheduling', $scheduling->id) }}" method="post">
                 @csrf
                 @method('POST')
+                <input type="hidden" name="professional_id" value="{{ $professional->id }}">
                 @include('admin.agenda.partials.agendas_partials_form')
                 <div class="mt-3">
                     <button class="btn" style="background: #4154f1; border-radius: 4px; color: #fff;">Salvar</button>

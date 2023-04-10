@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUpdateAgendaSingleFormRequest;
 use App\Models\Agenda;
 use App\Models\Professional;
 use App\Models\Service;
+use DateInterval;
 use DateTime;
 use Illuminate\Http\Request;
 
@@ -108,15 +109,56 @@ class AgendaController extends Controller
     public function scheduling(Request $request)
     {
 
-        $scheduling = Agenda::findOrFail($request->agenda_id);
-        $scheduling->client = $request->client;
-        $scheduling->email = $request->email;
-        $scheduling->service = $request->service;
-        $scheduling->updated_at = date('Y-m-d H:i:s', $request->server('REQUEST_TIME'));
-        $scheduling->save();
+        $service = Service::findOrFail($request->service);
+        $request_hour_dt = DateTime::createFromFormat('H:i:s', $request->scheduling_hour);
+        $scheduling_hour_dt = DateTime::createFromFormat('H:i:s', $request->scheduling_hour);
+        $hour = substr($service->time_service, 0, 2);
+        $minute = substr($service->time_service, 3, 2);
 
-        $date = $scheduling->date;
-        $professional_id =  $scheduling->professional_id;
+        //Adicionando tempo do serviço ao agendamento solicitado
+        $scheduling_add = $scheduling_hour_dt->add(new DateInterval('PT' . $hour . 'H' . $minute . 'M'));
+
+        $schedulings = Agenda::where('professional_id',  $request->professional_id)
+            ->where('date', $request->scheduling_date)->get();
+
+        //Check conflito de horários
+        foreach ($schedulings as $scheduling) {
+            $date = $scheduling->date;
+            $professional_id =  $scheduling->professional_id;
+
+            if ($scheduling->hour >= $request->scheduling_hour) {
+
+                $next_scheduling = DateTime::createFromFormat('H:i:s', $scheduling->hour);
+
+                if ($scheduling_add > $next_scheduling) {
+                    if (isset($scheduling->client)) {
+                        return redirect()->route('admin.agenda.view', compact('date', 'professional_id'))->with('msg', 'Conflito de horário, tempo de serviço excede horário disponível!');
+                    }
+                }
+            }
+        }
+
+        foreach ($schedulings as $scheduling) {
+            $date = $scheduling->date;
+            $professional_id =  $scheduling->professional_id;
+
+            if ($scheduling->hour >= $request->scheduling_hour) {
+
+                $next_scheduling = DateTime::createFromFormat('H:i:s', $scheduling->hour);
+
+                if ($scheduling_add > $next_scheduling) {
+                    if (isset($scheduling->client)) {
+                        return redirect()->route('admin.agenda.view', compact('date', 'professional_id'))->with('msg', 'Conflito de horário, tempo de serviço excede horário disponível!');
+                    } else {
+                        $scheduling->client = $request->client;
+                        $scheduling->email = $request->email;
+                        $scheduling->service = $request->service;
+                        $scheduling->updated_at = date('Y-m-d H:i:s', $request->server('REQUEST_TIME'));
+                        $scheduling->save();
+                    }
+                }
+            }
+        }
 
         return redirect()->route('admin.agenda.view', compact('date', 'professional_id'))->with('msg', 'Agendamento cadastrado com sucesso!');
     }
