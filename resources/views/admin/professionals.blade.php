@@ -54,10 +54,10 @@
                         </div>
                         <ul class="list-group list-group-flush">
 
-                            @foreach ($professional->services as $service_and_time)
+                            {{-- @foreach ($professional->services as $service_and_time)
                                 <li class="list-group-item">{{ $service_and_time->service }} -
                                     {{ date('H:i', strtotime($service_and_time->time_service)) }} </li>
-                            @endforeach
+                            @endforeach --}}
 
                         </ul>
                         <div class="card-body d-flex justify-content-around m-2">
