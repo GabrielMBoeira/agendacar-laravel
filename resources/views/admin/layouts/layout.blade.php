@@ -96,9 +96,14 @@
                             <span>Cadastrar agenda específica</span>
                         </a>
                     </li>
-
-
                 </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('client.login') }}">
+                    <i class="bi bi-link"></i>
+                    <span>Link para clientes</span>
+                </a>
             </li>
 
             @auth

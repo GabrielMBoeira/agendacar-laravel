@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\Business;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfessionalController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SocialiteController;
@@ -17,15 +18,15 @@ Route::get('/', function () {
 // Route::post('business-store', [Business::class, 'store'])->name('business.store');
 
 
+
+Route::get('/client-login', [ClientController::class, 'login'])->name('client.login');
+
+
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('dashboard');
-
-
-    Route::get('/client', [AgendaController::class, 'view'])->name('admin.agenda.view');
-
 
     Route::get('services-create', [ServiceController::class, 'create'])->name('admin.services.create');
     Route::get('services-index/{professional_id}', [ServiceController::class, 'index'])->name('admin.services.index');
