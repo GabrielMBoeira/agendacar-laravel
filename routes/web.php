@@ -19,7 +19,9 @@ Route::get('/', function () {
 
 
 
-Route::get('/client-login', [ClientController::class, 'login'])->name('client.login');
+Route::post('client-store', [ClientController::class, 'store'])->name('client.store');
+Route::get('client-login', [ClientController::class, 'login'])->name('client.login');
+Route::get('client-create', [ClientController::class, 'create'])->name('client.create');
 
 
 Route::middleware(['auth'])->group(function () {

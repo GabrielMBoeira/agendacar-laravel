@@ -2422,6 +2422,15 @@ section {
     align-items: center;
 }
 
+.form-create-client {
+    width: 400px;
+}
+
+.error-message-client {
+    background-color: #0257ee;
+    border-radius: 5px;
+}
+
 /*------------------------------------------------------------------
 Mobile Genaral
 ------------------------------------------------------------------ */
