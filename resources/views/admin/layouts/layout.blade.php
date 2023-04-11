@@ -100,7 +100,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('client.login') }}">
+                <a class="nav-link collapsed" href="{{ route('client.link') }}">
                     <i class="bi bi-link"></i>
                     <span>Link para clientes</span>
                 </a>

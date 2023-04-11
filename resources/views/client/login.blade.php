@@ -1,6 +1,9 @@
 @extends('client.layouts.layout')
 
 @section('main')
+
+
+
     @if (session('msg'))
         <!-- Modal -->
         <div class="modal fade" id="modalMessage" tabindex="-1" role="dialog" aria-labelledby="modalMessageTitle"
@@ -20,10 +23,10 @@
 
     <section id="hero" class="hero">
 
-        <h1 style="color: #fff">LavaCar Testes</h1>
+        <h1 style="color: #fff">{{ ucwords(strtolower($user->business)) }}</h1>
         <br>
         <br>
-        <form action="#" style="width: 400px">
+        {{-- <form action="{{ route('client.index') }}" style="width: 400px">
             <div class="form-group">
                 <label for="email" style="color: #fff">Email</label>
                 <input type="email" name="email" id="email" class="form-control">
@@ -33,18 +36,27 @@
             </div>
             <br>
             <div class="d-flex justify-content-around align-items-center">
-                <a href="#" style="color: #fff">Esqueci a senha</a>
+                <a href="#" class="btn btn-sm btn-primary" style="color:#fff">
+                    Esqueci a senha
+                </a>
                 <button class="btn btn-success">Entrar</button>
             </div>
-        </form>
+        </form> --}}
         <br>
-        <a href="#" class="btn-google">
+        <a href="login/google" class="btn-google">
             <div>
                 <img src="../assets/img/logo-google.png" width="20px" height="20px" alt="Login com Google">
                 &nbsp;
                 <span style="text-decoration: none; color: #000">Efetuar login com Google</span>
             </div>
-
+        </a>
+        <br>
+        <a href="login/facebook" class="btn-google">
+            <div>
+                <img src="../assets/img/logo-facebook.png" width="20px" height="20px" alt="Login com Google">
+                &nbsp;
+                <span style="text-decoration: none; color: #000">Efetuar login com Facebook</span>
+            </div>
         </a>
 
     </section>

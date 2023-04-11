@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'business',
         'password',
+        'hash',
     ];
 
     /**
@@ -46,4 +47,10 @@ class User extends Authenticatable
     public function professionals() {
         return $this->hasMany(Professional::class);
     }
+
+    public function clients() {
+        return $this->hasMany(Client::class);
+    }
+
+
 }

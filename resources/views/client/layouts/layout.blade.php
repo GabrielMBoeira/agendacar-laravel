@@ -50,7 +50,8 @@
                     <li><a class="nav-link scrollto" href="#">Portfolio</a></li>
                     <li><a class="nav-link scrollto" href="#">Equipe</a></li>
                     <li><a class="nav-link scrollto" href="#">Contato</a></li>
-                    <li><a class="getstarted scrollto" href=" {{ route('client.create') }} ">Cadastre-se</a></li>
+                    {{-- <li><a class="getstarted scrollto" href="#">Login</a></li> --}}
+                    {{-- <li><a class="getstarted scrollto" href=" {{ route('client.create') }} ">Cadastre-se</a></li> --}}
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>

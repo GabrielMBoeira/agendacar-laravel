@@ -13,15 +13,24 @@ Route::get('/', function () {
     return view('site.site');
 });
 
+
 // // Business
 // Route::get('business-create', [Business::class, 'create'])->name('business.create');
 // Route::post('business-store', [Business::class, 'store'])->name('business.store');
 
 
-
+Route::get('client-index', [ClientController::class, 'index'])->name('client.index');
 Route::post('client-store', [ClientController::class, 'store'])->name('client.store');
 Route::get('client-login', [ClientController::class, 'login'])->name('client.login');
+Route::get('client-link', [ClientController::class, 'link'])->name('client.link');
 Route::get('client-create', [ClientController::class, 'create'])->name('client.create');
+
+
+// Socialite
+Route::get('login/facebook', [SocialiteController::class, 'redirectToProvider'])->name('socialite.redirectToProvider');
+Route::get('login/facebook/callback', [SocialiteController::class, 'handleProviderCallback'])->name('socialite.handleProviderCallback');
+Route::get('login/google', [SocialiteController::class, 'redirectToProviderGoogle'])->name('socialite.redirectToProviderGoogle');
+Route::get('login/google/callback', [SocialiteController::class, 'handleProviderCallbackGoogle'])->name('socialite.handleProviderCallbackGoogle');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -59,12 +68,5 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('professionals/{id}', [ProfessionalController::class, 'destroy'])->name('admin.professionals.destroy');
 
 });
-
-
-// Socialite
-Route::get('login/facebook', [SocialiteController::class, 'redirectToProvider'])->name('socialite.redirectToProvider');
-Route::get('login/facebook/callback', [SocialiteController::class, 'handleProviderCallback'])->name('socialite.handleProviderCallback');
-Route::get('login/google', [SocialiteController::class, 'redirectToProviderGoogle'])->name('socialite.redirectToProviderGoogle');
-Route::get('login/google/callback', [SocialiteController::class, 'handleProviderCallbackGoogle'])->name('socialite.handleProviderCallbackGoogle');
 
 require __DIR__ . '/auth.php';
