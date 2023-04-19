@@ -4,9 +4,9 @@ services:
     app:
         image: "app:${TAG:-latest}"
         build:
-            args:
-                user: gabriel
-                uid: 1000
+            # args:
+            #     user: gabriel
+            #     uid: 1000
             context: ./
             dockerfile: Dockerfile
         container_name: app
