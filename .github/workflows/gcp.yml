@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: agendacar-prod
     env:
-      IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/agendacar:latest
+      IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/ag-car:latest
     steps:
       # Git checkout
       - name: Checkout
