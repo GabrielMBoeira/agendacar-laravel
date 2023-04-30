@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreClientFormRequest;
 use App\Models\Client;
+use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -22,7 +23,9 @@ class ClientController extends Controller
             return view('site.site');
         }
 
-       return view('client.login', compact('user'));
+        $professionals = $user->professionals;
+
+       return view('client.login', compact('user', 'professionals'));
 
     }
 
@@ -39,11 +42,7 @@ class ClientController extends Controller
         $user = auth()->user();
         $user_hash = urlencode($user->hash);
 
-        // return redirect()->route('client.login', ['hash' => $user_hash]);
         return redirect()->route('client.login', ['hash' => $user_hash]);
-
-
-        // return redirect()->route('client.login', $user_hash);
 
     }
 

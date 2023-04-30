@@ -2431,6 +2431,16 @@ section {
     border-radius: 5px;
 }
 
+.box-form {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    height: 500px;
+    width: 700px;
+}
+
 /*------------------------------------------------------------------
 Mobile Genaral
 ------------------------------------------------------------------ */

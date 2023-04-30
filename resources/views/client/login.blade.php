@@ -26,38 +26,40 @@
         <h1 style="color: #fff">{{ ucwords(strtolower($user->business)) }}</h1>
         <br>
         <br>
-        {{-- <form action="{{ route('client.index') }}" style="width: 400px">
-            <div class="form-group">
-                <label for="email" style="color: #fff">Email</label>
-                <input type="email" name="email" id="email" class="form-control">
-                <br>
-                <label for="password" style="color: #fff">Password</label>
-                <input type="password" name="password" id="password" class="form-control">
-            </div>
-            <br>
-            <div class="d-flex justify-content-around align-items-center">
-                <a href="#" class="btn btn-sm btn-primary" style="color:#fff">
-                    Esqueci a senha
-                </a>
-                <button class="btn btn-success">Entrar</button>
-            </div>
-        </form> --}}
-        <br>
-        <a href="login/google" class="btn-google">
-            <div>
-                <img src="../assets/img/logo-google.png" width="20px" height="20px" alt="Login com Google">
-                &nbsp;
-                <span style="text-decoration: none; color: #000">Efetuar login com Google</span>
-            </div>
-        </a>
-        <br>
-        <a href="login/facebook" class="btn-google">
-            <div>
-                <img src="../assets/img/logo-facebook.png" width="20px" height="20px" alt="Login com Google">
-                &nbsp;
-                <span style="text-decoration: none; color: #000">Efetuar login com Facebook</span>
-            </div>
-        </a>
+
+        <div class="box-form">
+            <form action="#" method="post">
+                @csrf
+                <div>
+                    <div class="row">
+                        <label for="name">Data:</label>
+                        <input type="date" name="date" id="date" class="form-control" value="{{ old('date') }}">
+                        <small class="text-light error-message-client">
+                            @error('date')
+                                {{ $message }}
+                            @enderror
+                        </small>
+                    </div>
+                    <div class="row">
+                        <label for="service">Serviço</label>
+                        <select name="service" id="service" class="form-control">
+                            @foreach ($professionals as $professional)
+                                    <option value="{{ $service->id }}" {{ $service->id == $scheduling->service ? "selected" : '' }}>  {{ mb_strtoupper($service->service, 'UTF-8') }} </option>
+                            @endforeach
+                        </select>
+                        <small class="text-danger">
+                            @error('service')
+                                {{ $message }}
+                            @enderror
+                        </small>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-around align-items-center mt-3">
+                    <button class="btn btn-success">Cadastrar</button>
+                </div>
+            </form>
+        </div>
+
 
     </section>
 @endsection
