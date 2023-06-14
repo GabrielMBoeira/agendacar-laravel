@@ -2432,14 +2432,20 @@ section {
 }
 
 .box-form {
-    background-color: #fff;
+    /* background-color: #fff; */
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    height: 500px;
-    width: 700px;
+    height: 250px;
+    width: 400px;
 }
+
+.formulario {
+    width: 80%;
+}
+
 
 /*------------------------------------------------------------------
 Mobile Genaral
@@ -2465,3 +2471,5 @@ Mobile Genaral
         width: 100%;
     }
 }
+
+

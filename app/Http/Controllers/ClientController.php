@@ -3,18 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreClientFormRequest;
+use App\Models\Agenda;
 use App\Models\Client;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Symfony\Component\VarDumper\VarDumper;
-
-use function PHPUnit\Framework\isEmpty;
 
 class ClientController extends Controller
 {
-    public function login(Request $request, User $user_model)
+    public function agenda(Request $request, User $user_model)
     {
 
         $hash = urldecode($request->input('hash'));
@@ -23,16 +20,35 @@ class ClientController extends Controller
             return view('site.site');
         }
 
+        $agendas =  Agenda::select('date')
+                        ->distinct()
+                        ->where('user_id', $user->id)
+                        ->get();
+
+        $services = Service::select(['id','service'])
+                        ->where('user_id', $user->id)
+                        ->get();
+
         $professionals = $user->professionals;
 
-       return view('client.login', compact('user', 'professionals'));
+       return view('client.agenda', compact('user', 'services'));
 
     }
 
-    public function index()
+    public function ajaxDate(Request $request)
     {
 
-        dd('index');
+        $service_id = $request->input('service_id');
+
+        $agendas = Agenda::select('agendas.date')
+                            ->distinct()
+                            ->leftJoin('professionals', 'professionals.id', '=', 'agendas.professional_id')
+                            ->leftJoin('services', 'services.professional_id', '=', 'professionals.id')
+                            ->where('services.id', $service_id)
+                            ->orderByDesc('agendas.date')
+                            ->get();
+
+        return json_encode($agendas);
 
     }
 
@@ -42,7 +58,7 @@ class ClientController extends Controller
         $user = auth()->user();
         $user_hash = urlencode($user->hash);
 
-        return redirect()->route('client.login', ['hash' => $user_hash]);
+        return redirect()->route('client.agenda', ['hash' => $user_hash]);
 
     }
 
@@ -70,6 +86,6 @@ class ClientController extends Controller
             }
         }
 
-        return redirect()->route('client.login')->with('msg', 'Usuário cadastrado com sucesso.');
+        return redirect()->route('client.link')->with('msg', 'Usuário cadastrado com sucesso.');
     }
 }

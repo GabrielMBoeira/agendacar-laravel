@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AgendaController;
-use App\Http\Controllers\Business;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfessionalController;
 use App\Http\Controllers\ServiceController;
@@ -21,7 +20,8 @@ Route::get('/', function () {
 
 Route::get('client-index', [ClientController::class, 'index'])->name('client.index');
 Route::post('client-store', [ClientController::class, 'store'])->name('client.store');
-Route::get('client-login', [ClientController::class, 'login'])->name('client.login');
+Route::get('client-agenda', [ClientController::class, 'agenda'])->name('client.agenda');
+Route::post('client-ajax-date', [ClientController::class, 'ajaxDate'])->name('client.ajax.date');
 Route::get('client-link', [ClientController::class, 'link'])->name('client.link');
 Route::get('client-create', [ClientController::class, 'create'])->name('client.create');
 
