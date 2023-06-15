@@ -8,6 +8,7 @@ use App\Models\Client;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
@@ -46,6 +47,24 @@ class ClientController extends Controller
                             ->leftJoin('services', 'services.professional_id', '=', 'professionals.id')
                             ->where('services.id', $service_id)
                             ->orderByDesc('agendas.date')
+                            ->get();
+
+        return json_encode($agendas);
+
+    }
+
+    public function ajaxAgenda(Request $request)
+    {
+
+        $hash = $request->input('hash');
+        $date = $request->input('date');
+
+        $agendas = Agenda::select([DB::raw('SUBSTR(agendas.hour, 1, 2) as hour'), DB::raw('SUBSTR(agendas.hour, 4, 2) as minute')])
+                            ->leftJoin('users', 'users.id', '=', 'agendas.user_id')
+                            ->where('users.hash', $hash)
+                            ->where('agendas.date', $date)
+                            ->where('agendas.status', 'active')
+                            ->orderBy('agendas.date')
                             ->get();
 
         return json_encode($agendas);

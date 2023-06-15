@@ -2446,6 +2446,22 @@ section {
     width: 80%;
 }
 
+.btn-agenda-hour {
+    background-color: #4154F1;
+    color: #fff;
+}
+
+.btn-agenda-hour:hover {
+    background-color: #8894f6;
+    color: #fff;
+}
+
+.div-agenda-hour {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 
 /*------------------------------------------------------------------
 Mobile Genaral
