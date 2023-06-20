@@ -11,9 +11,19 @@
                     Horários de agendamento
                 </div>
                 <div class="modal-footer d-flex justify-content-center align-iten">
-                    <div class="row">
-                        <div id="div-agenda-hour" class="div-agenda-hour"></div>
-                    </div>
+                    <form action="{{ route('client.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="hashForm" id="hashForm">
+                        <input type="hidden" name="serviceForm" id="serviceForm">
+                        <input type="hidden" name="professionalForm" id="professionalForm">
+                        <input type="hidden" name="dateForm" id="dateForm">
+                        <input type="hidden" name="nameForm" id="nameForm">
+                        <input type="hidden" name="emailForm" id="emailForm">
+                        <input type="hidden" name="phoneForm" id="phoneForm">
+                        <div class="row">
+                            <div id="div-agenda-hour" class="div-agenda-hour"></div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -46,10 +56,30 @@
                 </div>
 
                 <div class="my-2">
+                    <label for="professional">Profissional</label>
+                    <input type="text" name="professional" id="professional" class="form-control">
+                </div>
+
+                <div class="my-2">
                     <label for="date">Selecione uma data</label>
                     <select name="date" id="date" class="form-control">
                         <option value="" selected>Escolha uma data</option>
                     </select>
+                </div>
+
+                <div class="my-2">
+                    <label for="name">Digite seu nome</label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Digite seu nome...">
+                </div>
+
+                <div class="my-2">
+                    <label for="email">Digite seu email</label>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Digite seu email...">
+                </div>
+
+                <div class="my-2">
+                    <label for="phone">Digite seu telefone</label>
+                    <input type="text" name="phone" id="phone" class="form-control" placeholder="Digite seu telefone...">
                 </div>
 
                 <div class="d-flex justify-content-center align-items-center">
@@ -69,6 +99,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
 
 <script>
+    window.onload = function() {
+        $('#modalMessage').appendTo("body").modal('hide');
+        $('#date').prop('disabled', true);
+        $('#professional').val("Profissional");
+        $('#professional').prop('disabled', true);
+    }
+
     function getDates() {
 
         let service_id = $('#service').val();
@@ -90,23 +127,16 @@
 
                 response.forEach(element => {
                     $('#date').append("<option>" + element.date + "</option>");
+                    $('#professional').val(element.name);
                 });
+
                 $('#date').prop('disabled', false);
             }
         });
     }
 
 
-    //Script Modal
-    window.onload = function() {
-        $('#modalMessage').appendTo("body").modal('hide');
-        $('#date').prop('disabled', true);
-    }
-
-    function closeModal() {
-        $('#modalMessage').modal('hide');
-    }
-
+    //Monta botões de horários em modal
     $(document).ready(function() {
         $('#form').submit(function(e) {
             e.preventDefault();
@@ -114,8 +144,11 @@
             let hash = $('#hash').val();
             let service = $('#service').val();
             let date = $('#date').val();
+            let name = $('#name').val();
+            let email = $('#email').val();
+            let phone = $('#phone').val();
 
-            if(!service || !date) {
+            if (!service || !date || !name || !email || !phone) {
                 alert('Preencher campos pendentes')
                 return false
             }
@@ -140,10 +173,10 @@
 
                         const hour = response[i].hour
                         const minute = response[i].minute
-                        const hourFormatted = hour+':'+minute
+                        const hourFormatted = hour + ':' + minute
 
                         $('#div-agenda-hour').append(
-                            "<input type='button' class='btn m-1 btn-agenda-hour' id='btn-agenda-hour' onclick='closeModal()' value='"+hourFormatted+"'></>"
+                        "<input type='submit' name='btn_agenda_hour' class='btn m-1 btn-agenda-hour' id='btn_agenda_hour' value='" + hourFormatted + "' onclick='transferForm(event)'></>"
                         );
                     }
 
@@ -154,5 +187,21 @@
 
         });
     });
+
+    // function closeModal() {
+    //     $('#modalMessage').modal('hide');
+    // }
+
+    function transferForm(event) {
+
+         $('#serviceForm').val($('#service').val())
+         $('#professionalForm').val($('#professional').val())
+         $('#dateForm').val($('#date').val())
+         $('#nameForm').val($('#name').val())
+         $('#emailForm').val($('#email').val())
+         $('#phoneForm').val($('#phone').val())
+         $('#hashForm').val($('#hash').val())
+         const btnHour = event.target.value;
+    }
 
 </script>
