@@ -2,9 +2,24 @@
 
 @section('main')
 
-    <!-- Modal -->
-    <div class="modal fade" id="modalMessage" tabindex="-1" role="dialog" aria-labelledby="modalMessageTitle"
-        aria-hidden="true">
+    <!-- Modal msg -->
+    @if (session('msg'))
+        <div class="modal fade" id="modalMessage" tabindex="-1" role="dialog" aria-labelledby="modalMessageTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" style="background-color: #4154f1; color:#fff">
+                        {{ session('msg') }}
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center align-iten">
+                        <button type="button" class="btn btn-primary" onclick="closeModal()">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    <!-- Modal horários agenda -->
+    <div class="modal fade" id="modalAgenda" tabindex="-1" role="dialog" aria-labelledby="modalAgendaTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body" style="background-color: #4154f1; color:#fff">
@@ -100,7 +115,8 @@
 
 <script>
     window.onload = function() {
-        $('#modalMessage').appendTo("body").modal('hide');
+        $('#modalMessage').appendTo("body").modal('show');
+        $('#modalAgenda').appendTo("body").modal('hide');
         $('#date').prop('disabled', true);
         $('#professional').val("Profissional");
         $('#professional').prop('disabled', true);
@@ -180,7 +196,7 @@
                         );
                     }
 
-                    $('#modalMessage').modal('show');
+                    $('#modalAgenda').modal('show');
 
                 }
             });
@@ -188,9 +204,6 @@
         });
     });
 
-    // function closeModal() {
-    //     $('#modalMessage').modal('hide');
-    // }
 
     function transferForm(event) {
 
@@ -202,6 +215,10 @@
          $('#phoneForm').val($('#phone').val())
          $('#hashForm').val($('#hash').val())
          const btnHour = event.target.value;
+    }
+
+    function closeModal() {
+        $('#modalMessage').modal('hide');
     }
 
 </script>

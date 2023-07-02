@@ -133,7 +133,7 @@ class AgendaController extends Controller
             ->where('user_id', $user->id)
             ->where('date', $request->scheduling_date)->get();
 
-        //Check conflito de horários
+        //Check conflito de horários para verificar se há tempo hábil para agendamento
         foreach ($schedulings as $scheduling) {
             $date = $scheduling->date;
             $professional_id =  $scheduling->professional_id;
@@ -150,6 +150,7 @@ class AgendaController extends Controller
             }
         }
 
+        //Salvando horários nos agendamentos
         foreach ($schedulings as $scheduling) {
             $date = $scheduling->date;
             $professional_id =  $scheduling->professional_id;

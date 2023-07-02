@@ -26,9 +26,7 @@
             <div class="row">
 
                 <div class="card-body">
-                    <h5 class="card-title">Serviços {{ mb_convert_case($professional->name, MB_CASE_TITLE, 'UTF-8') }}
-                        <span> | Today</span>
-                    </h5>
+                    <h5 class="card-title">Serviços {{ mb_convert_case($professional->name, MB_CASE_TITLE, 'UTF-8') }}</h5>
 
                     <table class="table table-borderless datatable">
                         <thead>

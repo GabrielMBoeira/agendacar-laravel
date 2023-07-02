@@ -19,8 +19,7 @@ Route::get('/', function () {
 
 
 Route::get('client-index', [ClientController::class, 'index'])->name('client.index');
-Route::post('client-store', [ClientController::class, 'store'])->name('client.store');
-// Route::post('client-store', [ClientController::class, 'store'])->name('client.store');
+Route::post('client-store', [ClientController::class, 'scheduling'])->name('client.store');
 Route::get('client-agenda', [ClientController::class, 'agenda'])->name('client.agenda');
 Route::post('client-ajax-date', [ClientController::class, 'ajaxDate'])->name('client.ajax.date');
 Route::post('client-ajax-agenda', [ClientController::class, 'ajaxAgenda'])->name('client.ajax.agenda');
